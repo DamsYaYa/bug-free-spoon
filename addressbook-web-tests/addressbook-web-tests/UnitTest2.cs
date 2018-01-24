@@ -4,8 +4,10 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+
 
 namespace SeleniumTests
 {
@@ -20,10 +22,11 @@ namespace SeleniumTests
         [SetUp]
         public void SetupTest()
         {
-            FirefoxOptions options = new FirefoxOptions();
-            options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
-            options.UseLegacyImplementation = true;
-            driver = new FirefoxDriver(options);
+            // FirefoxOptions options = new FirefoxOptions();
+            // options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+            // options.UseLegacyImplementation = true;
+            //  driver = new FirefoxDriver(options);
+            driver = new ChromeDriver();
             baseURL = "http://localhost/";
             verificationErrors = new StringBuilder();
         }
