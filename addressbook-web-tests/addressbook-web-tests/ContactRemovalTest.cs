@@ -7,21 +7,20 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class AddNewContact : TestBase
+    public class RemoveContact : TestBase
     {
+
         [Test]
-        public void AddNewContactTest()
+        public void ContactRemovalTest()
         {
             navigationHelper.OpenHomePage();
             loginHelper.Login(new AccountData("admin", "secret"));
-            contactHelper.AddNew();
-            ContactData contact = new ContactData("Ekaterina");
-            contact.Lastname = "Dams";
-            contactHelper.FillForm(contact);
-            contactHelper.SubmitAdding();
+            navigationHelper.GoToHomePage();
+            contactHelper.SelectContact();
+            contactHelper.RemoveSelectedContact();
+            contactHelper.SubmitRemoveContact();
             navigationHelper.ReturnToHomePage();
             loginHelper.Logout();
         }
-
     }
 }

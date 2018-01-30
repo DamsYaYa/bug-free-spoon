@@ -13,17 +13,22 @@ namespace WebAddressbookTests
        [Test]
         public void CreatorGroupsTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            OpenGroupPage();
-            CreateNewGroup();
+            navigationHelper.OpenHomePage();
+            loginHelper.Login(new AccountData("admin", "secret"));
+            navigationHelper.OpenGroupPage();
+            groupHelper.CreateNewGroup();
             GroupData group = new GroupData("aaa");
             group.Header = "bbb";
             group.Footer = "ccc";
-            FillForm(group);
-            SubmitGroupCreate();
-            ReturnToGroupPage();
-            Logout();
+            groupHelper.FillForm(group);
+            groupHelper.SubmitGroupCreate();
+            navigationHelper.ReturnToGroupPage();
+            loginHelper.Logout();
+        }
+
+        private void FillForm(GroupData group)
+        {
+            throw new NotImplementedException();
         }
     }
 }

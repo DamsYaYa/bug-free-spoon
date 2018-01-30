@@ -13,12 +13,13 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            OpenGroupPage();
-            SelectGroup();
-            RemoveSelectedGroup(1);
-            ReturnToHomePage();
+            navigationHelper.OpenHomePage();
+            loginHelper.Login(new AccountData("admin", "secret"));
+            navigationHelper.OpenGroupPage();
+            groupHelper.SelectGroup();
+            groupHelper.RemoveSelectedGroup(1);
+            navigationHelper.ReturnToHomePage();
+            loginHelper.Logout();
         }
     }
 }

@@ -61,8 +61,13 @@
     <Compile Include="AccountData.cs" />
     <Compile Include="Circle.cs" />
     <Compile Include="ContactData.cs" />
+    <Compile Include="ContactHelper.cs" />
     <Compile Include="Figure.cs" />
     <Compile Include="GroupData.cs" />
+    <Compile Include="GroupHelper.cs" />
+    <Compile Include="HelperBase.cs" />
+    <Compile Include="LoginHelper.cs" />
+    <Compile Include="NavigationHelper.cs" />
     <Compile Include="Square.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="UnitTest1.cs" />
@@ -70,6 +75,7 @@
     <Compile Include="CreateGroup.cs" />
     <Compile Include="AddNewContact.cs" />
     <Compile Include="RemoveGroup.cs" />
+    <Compile Include="ContactRemovalTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

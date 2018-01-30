@@ -1,24 +1,79 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="WebAddressbookTests.TestBase" Collapsed="true">
-    <Position X="2.75" Y="0.5" Width="1.5" />
+  <Class Name="WebAddressbookTests.TestBase">
+    <Position X="1" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAUAIABQBABAAAAAAALAAAAIAACAAAAQAAAAQSA=</HashCode>
+      <HashCode>AAAAAAQAIAAAAABAAAAAAATAAAAAAAAAABCAAAEAACA=</HashCode>
       <FileName>TestBase.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="loginHelper" />
+      <Field Name="navigationHelper" />
+      <Field Name="groupHelper" />
+      <Field Name="contactHelper" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="WebAddressbookTests.CreateGroup" Collapsed="true">
-    <Position X="0.75" Y="1.5" Width="1.5" />
+    <Position X="0.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>CreateGroup.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WebAddressbookTests.RemoveGroup" Collapsed="true">
-    <Position X="5.25" Y="1.5" Width="1.5" />
+    <Position X="2.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RemoveGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.ContactHelper" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAEAAEAAAAACBAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ContactHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.GroupHelper" Collapsed="true">
+    <Position X="7" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAABAAAAAAAAAAACAAAAAAAAAAAAAAAAAQQA=</HashCode>
+      <FileName>GroupHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.LoginHelper" Collapsed="true">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>LoginHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.NavigationHelper" Collapsed="true">
+    <Position X="7" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQBAAAAAAAAAAAAAAIAACAAAAAAAAAAKA=</HashCode>
+      <FileName>NavigationHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.HelperBase" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HelperBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.AddNewContact" Collapsed="true">
+    <Position X="4.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AddNewContact.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.RemoveContact" Collapsed="true">
+    <Position X="6.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>ContactRemovalTest.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
