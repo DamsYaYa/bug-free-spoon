@@ -17,10 +17,7 @@ namespace WebAddressbookTests
         protected string baseURL;
         private bool acceptNextAlert = true;
 
-        protected LoginHelper loginHelper;
-        protected NavigationHelper navigationHelper;
-        protected GroupHelper groupHelper;
-        protected ContactHelper contactHelper;
+        public ApplicationManager applicationManager;
 
         [SetUp]
         public void SetupTest()
@@ -29,24 +26,14 @@ namespace WebAddressbookTests
             baseURL = "http://localhost/";
             verificationErrors = new StringBuilder();
 
-            loginHelper = new LoginHelper(driver);
-            navigationHelper = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            applicationManager = new ApplicationManager();
+              
         }
 
         [TearDown]
         public void TeardownTest()
         {
-            try
-            {
-                driver.Quit();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-            Assert.AreEqual("", verificationErrors.ToString());
+            applicationManager.Stop();
         }
     }
 }

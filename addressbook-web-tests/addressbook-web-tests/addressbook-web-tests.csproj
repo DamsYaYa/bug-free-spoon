@@ -58,32 +58,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountData.cs" />
-    <Compile Include="Circle.cs" />
-    <Compile Include="ContactData.cs" />
-    <Compile Include="ContactHelper.cs" />
-    <Compile Include="Figure.cs" />
-    <Compile Include="GroupData.cs" />
-    <Compile Include="GroupHelper.cs" />
-    <Compile Include="HelperBase.cs" />
-    <Compile Include="LoginHelper.cs" />
-    <Compile Include="NavigationHelper.cs" />
-    <Compile Include="Square.cs" />
-    <Compile Include="TestBase.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Model\AccountData.cs" />
+    <Compile Include="appmanager\ApplicationManager.cs" />
+    <Compile Include="Figure\Circle.cs" />
+    <Compile Include="Model\ContactData.cs" />
+    <Compile Include="appmanager\ContactHelper.cs" />
+    <Compile Include="Figure\Figure.cs" />
+    <Compile Include="Model\GroupData.cs" />
+    <Compile Include="appmanager\GroupHelper.cs" />
+    <Compile Include="appmanager\HelperBase.cs" />
+    <Compile Include="appmanager\LoginHelper.cs" />
+    <Compile Include="appmanager\NavigationHelper.cs" />
+    <Compile Include="Figure\Square.cs" />
+    <Compile Include="Tests\TestBase.cs" />
+    <Compile Include="Figure\UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CreateGroup.cs" />
-    <Compile Include="AddNewContact.cs" />
-    <Compile Include="RemoveGroup.cs" />
-    <Compile Include="ContactRemovalTest.cs" />
+    <Compile Include="Tests\GroupCreatorTest.cs" />
+    <Compile Include="Tests\ContactCreatorTest.cs" />
+    <Compile Include="Tests\GroupRemovalTest.cs" />
+    <Compile Include="Tests\ContactRemovalTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
-    <None Include="ClassDiagram3.cd" />
+    <None Include="Figure\ClassDiagram2.cd" />
     <None Include="TestBaseDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

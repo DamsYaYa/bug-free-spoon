@@ -23,23 +23,10 @@ namespace WebAddressbookTests
             // Открытие начальной страницы
             driver.Navigate().GoToUrl(baseURL + "addressbook/");
         }
-
-        public void ReturnToHomePage()
-        {
-            // Возвращение на страницу со списком групп
-            driver.FindElement(By.LinkText("group page")).Click();
-        }
-
         public void OpenGroupPage()
         {
             // Переход на страницу со списком групп
             driver.FindElement(By.LinkText("groups")).Click();
-        }
-
-        public void ReturnToGroupPage()
-        {
-            // возвращение на страницу с группами
-            driver.FindElement(By.LinkText("group page")).Click();
         }
 
         public void GoToHomePage()

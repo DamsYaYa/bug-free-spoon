@@ -83,7 +83,7 @@ namespace WebAddressbookTests
         public void SubmitRemoveContact()
         {
             //Подтверждение удаления контакта
-            Assert.IsTrue(Regex.IsMatch(CloseAlertAndGetItsText(), "^Delete 1 addresses[\\s\\S]$"));
+            driver.SwitchTo().Alert().Accept();
         }
     }
 }
