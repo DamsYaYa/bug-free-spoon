@@ -22,12 +22,22 @@ namespace WebAddressbookTests
         protected ContactHelper contactHelper;
         private object verificationErrors;
 
+
+
         public ApplicationManager()
         {
             loginHelper = new LoginHelper(driver);
             navigationHelper = new NavigationHelper(driver, baseURL);
             groupHelper = new GroupHelper(driver);
             contactHelper = new ContactHelper(driver);
+        }
+
+        [SetUp]
+        public void SetupTest()
+        {
+            driver = new ChromeDriver();
+            baseURL = "http://localhost/";
+            verificationErrors = new StringBuilder();
         }
 
         public void Stop ()

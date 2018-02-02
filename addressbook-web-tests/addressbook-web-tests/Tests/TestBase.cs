@@ -12,22 +12,12 @@ namespace WebAddressbookTests
 {
     public class TestBase
     {
-        protected IWebDriver driver;
-        private StringBuilder verificationErrors;
-        protected string baseURL;
-        private bool acceptNextAlert = true;
-
         public ApplicationManager applicationManager;
 
         [SetUp]
         public void SetupTest()
         {
-            driver = new ChromeDriver();
-            baseURL = "http://localhost/";
-            verificationErrors = new StringBuilder();
-
             applicationManager = new ApplicationManager();
-              
         }
 
         [TearDown]
