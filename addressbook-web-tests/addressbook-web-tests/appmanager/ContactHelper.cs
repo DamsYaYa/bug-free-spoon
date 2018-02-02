@@ -12,9 +12,12 @@ namespace WebAddressbookTests
 {
    public class ContactHelper : HelperBase
     {
+        private ApplicationManager applicationManager;
+
         public ContactHelper(IWebDriver driver) : base (driver)
         {
         }
+
         public void AddNew()
         {
             //Добавление нового контакта

@@ -12,9 +12,13 @@ namespace WebAddressbookTests
 {
    public class GroupHelper : HelperBase
     {
+        private ApplicationManager applicationManager;
+
         public GroupHelper(IWebDriver driver) : base (driver)
         {
         }
+
+
         public void CreateNewGroup()
         {
             // создание новой группы
