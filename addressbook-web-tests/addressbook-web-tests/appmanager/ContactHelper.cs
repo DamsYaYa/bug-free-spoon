@@ -12,19 +12,26 @@ namespace WebAddressbookTests
 {
    public class ContactHelper : HelperBase
     {
-        private ApplicationManager applicationManager;
-
-        public ContactHelper(IWebDriver driver) : base (driver)
+        public ContactHelper(ApplicationManager manager) : base (manager)
         {
         }
 
-        public void AddNew()
+        public ContactHelper AddNew()
         {
+            manager.Navigator.OpenHomePage();
+
             //Добавление нового контакта
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
+        }
+        public ContactHelper CreateContact(ContactData contact)
+        {
+            FillForm(contact);
+            SubmitAdding();
+            return this;
         }
 
-        public void FillForm(ContactData contact)
+        public ContactHelper FillForm(ContactData contact)
         {
             //Заполнение полей ввода
             driver.FindElement(By.Name("firstname")).Clear();
@@ -63,30 +70,46 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("phone2")).SendKeys(contact.Phone2);
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(contact.Notes);
+            return this;
         }
 
-        public void SubmitAdding()
+        public ContactHelper SubmitAdding()
         {
             // Подтверждаем создание нового контакта
             driver.FindElement(By.Name("submit")).Click();
+            return this;
         }
 
-        public void SelectContact()
+        public ContactHelper SelectContact()
         {
             // Выбор контакта
             driver.FindElement(By.XPath("//tr[3]/td/input")).Click();
+            return this;
         }
 
-        public void RemoveSelectedContact()
+        public ContactHelper RemoveSelectedContact()
         {
             // Удалить выбранный контакт
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
         }
 
-        public void SubmitRemoveContact()
+        public ContactHelper SubmitRemoveContact()
         {
             //Подтверждение удаления контакта
             driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+
+        public ContactHelper RemoveContact(int v)
+        {
+            manager.Navigator.OpenHomePage();
+
+            SelectContact();
+            RemoveSelectedContact();
+            SubmitRemoveContact();
+            manager.Navigator.GoToHomePage();
+            return this;
         }
     }
 }

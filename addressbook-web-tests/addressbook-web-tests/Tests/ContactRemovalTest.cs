@@ -13,13 +13,7 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalTest()
         {
-            applicationManager.Navigator.OpenHomePage();
-            applicationManager.Auth.Login(new AccountData("admin", "secret"));
-            applicationManager.Navigator.GoToHomePage();
-            applicationManager.Contacts.SelectContact();
-            applicationManager.Contacts.RemoveSelectedContact();
-            applicationManager.Contacts.SubmitRemoveContact();
-            applicationManager.Navigator.GoToHomePage();
+            applicationManager.Contacts.RemoveContact(1);
             applicationManager.Auth.Logout();
         }
     }

@@ -10,18 +10,25 @@ namespace WebAddressbookTests
     public class AddNewContact : TestBase
     {
         [Test]
-        public void AddNewContactTest()
+        public void ContactCreatorTest()
         {
-            applicationManager.Navigator.OpenHomePage();
-            applicationManager.Auth.Login(new AccountData("admin", "secret"));
-            applicationManager.Contacts.AddNew();
-            ContactData contact = new ContactData("Ekaterina");
+            ContactData contact = new ContactData("Ekaterina");          
             contact.Lastname = "Dams";
-            applicationManager.Contacts.FillForm(contact);
-            applicationManager.Contacts.SubmitAdding();
-            applicationManager.Navigator.GoToHomePage();
+            
+            applicationManager.Contacts.AddNew();
+            applicationManager.Contacts.CreateContact(contact);            
             applicationManager.Auth.Logout();
         }
 
+        [Test]
+        public void EmptyContactCreatorTest()
+        {
+            ContactData contact = new ContactData("");
+            contact.Lastname = "";
+            
+            applicationManager.Contacts.AddNew();
+            applicationManager.Contacts.CreateContact(contact);            
+            applicationManager.Auth.Logout();
+        }
     }
 }
