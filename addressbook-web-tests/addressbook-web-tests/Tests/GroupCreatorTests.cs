@@ -18,7 +18,6 @@ namespace WebAddressbookTests
             group.Footer = "ccc";
 
             applicationManager.Groups.CreateGroup(group);
-            applicationManager.Auth.Logout();
         }
 
         [Test]
@@ -30,7 +29,6 @@ namespace WebAddressbookTests
             group.Footer = "";
 
             applicationManager.Groups.CreateGroup(group);
-            applicationManager.Auth.Logout();
         }
 
         private void FillForm(GroupData group)

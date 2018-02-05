@@ -17,7 +17,6 @@ namespace WebAddressbookTests
             
             applicationManager.Contacts.AddNew();
             applicationManager.Contacts.CreateContact(contact);            
-            applicationManager.Auth.Logout();
         }
 
         [Test]
@@ -28,7 +27,6 @@ namespace WebAddressbookTests
             
             applicationManager.Contacts.AddNew();
             applicationManager.Contacts.CreateContact(contact);            
-            applicationManager.Auth.Logout();
         }
     }
 }

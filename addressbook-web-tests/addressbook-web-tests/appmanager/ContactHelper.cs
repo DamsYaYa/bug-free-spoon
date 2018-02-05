@@ -24,10 +24,32 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
         }
+
         public ContactHelper CreateContact(ContactData contact)
         {
             FillForm(contact);
             SubmitAdding();
+            return this;
+        }
+
+        public ContactHelper Modify(int v, ContactData newContactData)
+        {
+            manager.Navigator.OpenHomePage();
+            SelectContact();
+            InitContactModification();
+            FillForm(newContactData);
+            SubmitContactModification();
+            return this;
+        }
+
+            public ContactHelper RemoveContact(int v)
+        {
+            manager.Navigator.OpenHomePage();
+
+            SelectContact();
+            RemoveSelectedContact();
+            SubmitRemoveContact();
+            manager.Navigator.GoToHomePage();
             return this;
         }
 
@@ -101,14 +123,15 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper RemoveContact(int v)
+        public ContactHelper SubmitContactModification()
         {
-            manager.Navigator.OpenHomePage();
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
 
-            SelectContact();
-            RemoveSelectedContact();
-            SubmitRemoveContact();
-            manager.Navigator.GoToHomePage();
+        public ContactHelper InitContactModification()
+        {
+            driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
             return this;
         }
     }

@@ -24,12 +24,24 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public GroupHelper Modify(int v, GroupData newGroupData)
+        {
+            manager.Navigator.OpenGroupPage();
+
+            SelectGroup();
+            InitGroupModification();
+            FillForm(newGroupData);
+            SubmitGroupModification();
+           
+            return this;
+        }
+
         public GroupHelper RemoveGroup(int v)
         {
             manager.Navigator.OpenGroupPage();
 
             SelectGroup();
-            RemoveSelectedGroup(1);
+            RemoveSelectedGroup(v);
             manager.Navigator.OpenGroupPage();
             return this;
         }
@@ -69,6 +81,18 @@ namespace WebAddressbookTests
         {
             // Выбор группы
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[3]")).Click();
+            return this;
+        }
+
+        public GroupHelper SubmitGroupModification()
+        {
+            
+            return this;
+        }
+
+        public GroupHelper InitGroupModification()
+        {
+            driver.FindElement(By.Name("edit")).Click();
             return this;
         }
     }
