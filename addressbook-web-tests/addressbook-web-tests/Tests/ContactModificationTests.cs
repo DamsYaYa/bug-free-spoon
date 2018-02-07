@@ -17,7 +17,7 @@ namespace WebAddressbookTests
             ContactData newContactData = new ContactData("Malenkaya");
             newContactData.Lastname = "Loshadka";
 
-            applicationManager.Contacts.Modify(1, newContactData);
+            applicationManager.Contacts.Modify(newContactData);
         }
     }
 }
