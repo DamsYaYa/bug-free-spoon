@@ -14,7 +14,6 @@ namespace WebAddressbookTests
     {
         protected IWebDriver driver;
         protected string baseURL;
-        private bool acceptNextAlert = true;
 
         protected LoginHelper loginHelper;
         protected NavigationHelper navigationHelper;
