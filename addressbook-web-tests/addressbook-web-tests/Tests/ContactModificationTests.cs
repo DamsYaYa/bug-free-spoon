@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModificationTests : TestBase
+    public class ContactModificationTests : AuthTestBase
     {
         [Test]
         public void ContactModificationTest()
         {
-            ContactData newContactData = new ContactData("Malenkaya");
+            ContactData newContactData = new ContactData("Morskaya_pipiska");
             newContactData.Lastname = null;
 
             applicationManager.Contacts.Modify(newContactData);

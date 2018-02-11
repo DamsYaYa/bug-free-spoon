@@ -15,18 +15,9 @@ namespace WebAddressbookTests
         public ApplicationManager applicationManager;
 
         [SetUp]
-        public void SetupTest()
+        public void SetupApplicationManager()
         {
-            applicationManager = new ApplicationManager();
-            applicationManager.Navigator.OpenHomePage();
-            applicationManager.Auth.Login(new AccountData("admin", "secret"));
-
-        }
-
-        [TearDown]
-        public void TeardownTest()
-        {
-            applicationManager.Stop();
+            applicationManager = ApplicationManager.GetInstance();
         }
     }
 }

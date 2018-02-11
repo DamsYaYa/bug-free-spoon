@@ -21,7 +21,9 @@ namespace WebAddressbookTests
         protected ContactHelper contactHelper;
         private object verificationErrors;
 
-        public ApplicationManager()
+        private static ThreadLocal<ApplicationManager> applicationManager = new ThreadLocal<ApplicationManager>();
+
+        private ApplicationManager()
         {
 
             driver = new ChromeDriver();
@@ -35,15 +37,7 @@ namespace WebAddressbookTests
 
         }
 
-        public IWebDriver Driver
-        {
-            get
-            {
-                return driver;
-            }
-        }
-
-        public void Stop ()
+         ~ApplicationManager()
         {
             try
             {
@@ -54,8 +48,28 @@ namespace WebAddressbookTests
                 // Ignore errors if unable to close the browser
             }
             Assert.AreEqual("", verificationErrors.ToString());
+
         }
 
+        public static ApplicationManager GetInstance()
+        {
+            if(! applicationManager.IsValueCreated)
+            {
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.Navigator.OpenHomePage();
+                applicationManager.Value = newInstance;
+                
+            }
+            return applicationManager.Value;
+        }
+
+        public IWebDriver Driver
+        {
+            get
+            {
+                return driver;
+            }
+        }
 
         public void SubmitRemoveContact()
         {

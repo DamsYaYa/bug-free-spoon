@@ -28,7 +28,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.OpenGroupPage();
 
-            SelectGroup();
+            SelectGroup(1);
             InitGroupModification();
             FillForm(newGroupData);
             SubmitGroupModification();
@@ -40,7 +40,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.OpenGroupPage();
 
-            SelectGroup();
+            SelectGroup(1);
             RemoveSelectedGroup(1);
             manager.Navigator.OpenGroupPage();
             return this;
@@ -75,10 +75,10 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper SelectGroup()
+        public GroupHelper SelectGroup(int index)
         {
             // Выбор группы
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[3]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + " ]")).Click();
             return this;
         }
 
