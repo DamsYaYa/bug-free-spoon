@@ -7,13 +7,13 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
     [TestFixture]
     public class ContactModificationTests : AuthTestBase
     {
-        protected IWebDriver driver;
 
         [Test]
         public void ContactModificationTest()
@@ -35,17 +35,10 @@ namespace WebAddressbookTests
                 applicationManager.Contacts.CreateContact(contact);
             }
         }
-        public bool IsElementPresent(By locator)
+
+        private bool IsElementPresent(By locator)
         {
-            try
-            {
-                driver.FindElement(locator);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
+            throw new NotImplementedException();
         }
     }
 }

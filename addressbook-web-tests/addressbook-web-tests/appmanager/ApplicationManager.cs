@@ -24,8 +24,7 @@ namespace WebAddressbookTests
         private static ThreadLocal<ApplicationManager> applicationManager = new ThreadLocal<ApplicationManager>();
 
         private ApplicationManager()
-        {
-
+        {            
             driver = new ChromeDriver();
             baseURL = "http://localhost/";
             verificationErrors = new StringBuilder(); 
