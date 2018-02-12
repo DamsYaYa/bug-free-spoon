@@ -14,6 +14,15 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContactModificationTests : AuthTestBase
     {
+        protected IWebDriver driver;
+
+        public IWebDriver Driver
+        {
+            get
+            {
+                return driver;
+            }
+        }
 
         [Test]
         public void ContactModificationTest()
@@ -36,9 +45,17 @@ namespace WebAddressbookTests
             }
         }
 
-        private bool IsElementPresent(By locator)
+        public bool IsElementPresent(By locator)
         {
-            throw new NotImplementedException();
+            try
+            {
+                driver.FindElement(locator);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
         }
     }
 }
