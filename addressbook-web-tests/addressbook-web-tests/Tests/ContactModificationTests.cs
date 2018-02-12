@@ -11,12 +11,14 @@ using OpenQA.Selenium.Support.UI;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModificationTests : AuthTestBase 
+    public class ContactModificationTests : AuthTestBase
     {
-  
+        protected IWebDriver driver;
+
         [Test]
         public void ContactModificationTest()
         {
+
             ContactData newContactData = new ContactData("Morskaya_pipiska");
             newContactData.Lastname = null;
             ContactData contact = new ContactData("Ekaterina");
@@ -33,10 +35,11 @@ namespace WebAddressbookTests
                 applicationManager.Contacts.CreateContact(contact);
             }
         }
-        public bool IsElementPresent(By by)
+        public bool IsElementPresent(By locator)
         {
             try
             {
+                driver.FindElement(locator);
                 return true;
             }
             catch (NoSuchElementException)
