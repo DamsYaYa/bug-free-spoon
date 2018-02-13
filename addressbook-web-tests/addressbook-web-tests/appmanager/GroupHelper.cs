@@ -101,7 +101,12 @@ namespace WebAddressbookTests
             if (IsElementPresent(By.Name("edit")) 
                   && IsElementPresent (By.Name("selected[]")))
             {
-                manager.Groups.Modify(newGroupData);
+                manager.Navigator.OpenGroupPage();
+
+                SelectGroup(1);
+                InitGroupModification();
+                FillForm(newGroupData);
+                SubmitGroupModification();
             }
             else
             {
