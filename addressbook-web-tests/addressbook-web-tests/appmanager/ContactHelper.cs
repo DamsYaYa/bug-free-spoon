@@ -116,5 +116,20 @@ namespace WebAddressbookTests
             driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
             return this;
         }
+
+        public ContactHelper ModificationCurrentContact(ContactData newContactData)
+        {
+            if (IsElementPresent(By.XPath("(//input[@name='selected[]'])")))
+            {
+                manager.Contacts.Modify(newContactData);
+            }
+            else
+            {
+                ContactData contact = new ContactData("Ekaterina");
+                contact.Lastname = "Dams";
+                manager.Contacts.CreateContact(contact);
+            }
+            return this;
+        }
     }
 }
