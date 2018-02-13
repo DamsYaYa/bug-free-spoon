@@ -12,6 +12,8 @@ namespace WebAddressbookTests
 {
    public class GroupHelper : HelperBase
     {
+        public object applicationManager;
+
         public GroupHelper(ApplicationManager manager) : base (manager)
         {
         }
@@ -91,6 +93,24 @@ namespace WebAddressbookTests
         public GroupHelper InitGroupModification()
         {
             driver.FindElement(By.Name("edit")).Click();
+            return this;
+        }
+
+        public GroupHelper ModificationCurrentGroup(GroupData newGroupData)
+        {
+            if (IsElementPresent(By.Name("edit")) 
+                  && IsElementPresent (By.Name("selected[]")))
+            {
+                manager.Groups.Modify(newGroupData);
+            }
+            else
+            {
+                GroupData group = new GroupData("aaa");
+                group.Header = "bbb";
+                group.Footer = "ccc";
+
+                applicationManager.Groups.CreateGroup(group);
+            }
             return this;
         }
     }
