@@ -14,15 +14,6 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContactModificationTests : AuthTestBase
     {
-        protected IWebDriver driver;
-
-        public IWebDriver Driver
-        {
-            get
-            {
-                return driver;
-            }
-        }
 
         [Test]
         public void ContactModificationTest()
@@ -33,29 +24,7 @@ namespace WebAddressbookTests
             ContactData contact = new ContactData("Ekaterina");
             contact.Lastname = "Dams";
 
-            if (IsElementPresent(By.Name("selected")))
-            {
-                applicationManager.Contacts.Modify(newContactData);
-            }
-
-            else
-            {
-                applicationManager.Contacts.AddNew();
-                applicationManager.Contacts.CreateContact(contact);
-            }
-        }
-
-        public bool IsElementPresent(By locator)
-        {
-            try
-            {
-                driver.FindElement(locator);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
+            applicationManager.Contacts.ModificationCurrentContact(newContactData);
         }
     }
 }

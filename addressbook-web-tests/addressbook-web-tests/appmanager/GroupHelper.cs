@@ -109,7 +109,7 @@ namespace WebAddressbookTests
                 group.Header = "bbb";
                 group.Footer = "ccc";
 
-                applicationManager.Groups.CreateGroup(group);
+                manager.Groups.CreateGroup(group);
             }
             return this;
         }
