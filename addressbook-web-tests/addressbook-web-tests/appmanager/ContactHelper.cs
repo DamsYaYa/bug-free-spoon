@@ -27,6 +27,7 @@ namespace WebAddressbookTests
 
         public ContactHelper CreateContact(ContactData contact)
         {
+            driver.FindElement(By.LinkText("add new")).Click();
             FillForm(contact);
             SubmitAdding();
             return this;

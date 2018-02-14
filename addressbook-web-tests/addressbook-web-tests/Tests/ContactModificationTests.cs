@@ -21,8 +21,6 @@ namespace WebAddressbookTests
         {
             ContactData newContactData = new ContactData("Morskaya_pipiska");
             newContactData.Lastname = null;
-            ContactData contact = new ContactData("Ekaterina");
-            contact.Lastname = "Dams";
 
             applicationManager.Contacts.ModificationCurrentContact(newContactData);
         }
