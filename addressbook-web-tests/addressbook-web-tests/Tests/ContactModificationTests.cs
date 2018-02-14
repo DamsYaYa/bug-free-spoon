@@ -16,9 +16,9 @@ namespace WebAddressbookTests
     {
 
         [Test]
+
         public void ContactModificationTest()
         {
-
             ContactData newContactData = new ContactData("Morskaya_pipiska");
             newContactData.Lastname = null;
             ContactData contact = new ContactData("Ekaterina");
@@ -26,5 +26,6 @@ namespace WebAddressbookTests
 
             applicationManager.Contacts.ModificationCurrentContact(newContactData);
         }
+
     }
 }
