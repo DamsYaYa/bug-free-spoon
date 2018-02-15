@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -26,6 +27,18 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigator.OpenGroupPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                groups.Add(new GroupData(element.Text));
+            }
+            return groups;
+        }
+
         public GroupHelper Modify(GroupData newGroupData)
         {
             manager.Navigator.OpenGroupPage();
@@ -38,12 +51,12 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper RemoveGroup()
+        public GroupHelper RemoveGroup(int v)
         {
             manager.Navigator.OpenGroupPage();
 
-            SelectGroup(1);
-            RemoveSelectedGroup(1);
+            SelectGroup(0);
+            RemoveSelectedGroup(0);
             manager.Navigator.OpenGroupPage();
             return this;
         }
@@ -73,14 +86,14 @@ namespace WebAddressbookTests
         public GroupHelper RemoveSelectedGroup(int index)
         {
             // Удаление группы
-            driver.FindElement(By.XPath("(//input[@name='delete'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='delete'])[" + (index+1) + "]")).Click();
             return this;
         }
 
         public GroupHelper SelectGroup(int index)
         {
             // Выбор группы
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + " ]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + " ]")).Click();
             return this;
         }
 
@@ -103,7 +116,7 @@ namespace WebAddressbookTests
             {
                 manager.Navigator.OpenGroupPage();
 
-                SelectGroup(1);
+                SelectGroup(0);
                 InitGroupModification();
                 FillForm(newGroupData);
                 SubmitGroupModification();

@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -23,6 +24,18 @@ namespace WebAddressbookTests
             //Добавление нового контакта
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
+        }
+
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.OpenHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.Name("selected[]"));
+            foreach (IWebElement element in elements)
+            {
+                contacts.Add(new ContactData(element.Text));
+            }
+            return contacts;
         }
 
         public ContactHelper CreateContact(ContactData contact)
@@ -43,11 +56,11 @@ namespace WebAddressbookTests
             return this;
         }
 
-            public ContactHelper RemoveContact()
+            public ContactHelper RemoveContact(int v)
         {
             manager.Navigator.OpenHomePage();
 
-            SelectContact(1);
+            SelectContact(0);
             RemoveSelectedContact();
             SubmitRemoveContact();
             manager.Navigator.GoToHomePage();
@@ -88,7 +101,7 @@ namespace WebAddressbookTests
         public ContactHelper SelectContact(int index)
         {
             // Выбор контакта
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + " ]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + " ]")).Click();
             return this;
         }
 
