@@ -18,8 +18,12 @@ namespace WebAddressbookTests
 
             List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
 
-            applicationManager.Contacts.AddNew();
-            applicationManager.Contacts.CreateContact(contact);
+            if (applicationManager.Contacts.ModificationCurrentContact() == false)
+            {
+                ContactData newcontact = new ContactData("Ekaterina");
+                contact.Lastname = "Dams";
+                applicationManager.Contacts.CreateContact(contact);
+            }
             
             List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
             oldContacts.Add(contact);
@@ -36,8 +40,12 @@ namespace WebAddressbookTests
 
             List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
 
-            applicationManager.Contacts.AddNew();
-            applicationManager.Contacts.CreateContact(contact);
+            if (applicationManager.Contacts.ModificationCurrentContact() == false)
+            {
+                ContactData newcontact = new ContactData("");
+                contact.Lastname = "";
+                applicationManager.Contacts.CreateContact(contact);
+            }
 
             List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
             oldContacts.Add(contact);
@@ -54,8 +62,12 @@ namespace WebAddressbookTests
 
             List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
 
-            applicationManager.Contacts.AddNew();
-            applicationManager.Contacts.CreateContact(contact);
+            if (applicationManager.Contacts.ModificationCurrentContact() == false)
+            {
+                ContactData newcontact = new ContactData("a'a");
+                contact.Lastname = "";
+                applicationManager.Contacts.CreateContact(contact);
+            }
 
             List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
             oldContacts.Add(contact);

@@ -131,19 +131,16 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper ModificationCurrentContact(ContactData newContactData)
+        public bool ModificationCurrentContact()
         {
             if (IsElementPresent(By.XPath("(//input[@name='selected[]'])")))
             {
-                manager.Contacts.Modify(newContactData);
+                return true;
             }
             else
             {
-                ContactData contact = new ContactData("Ekaterina");
-                contact.Lastname = "Dams";
-                manager.Contacts.CreateContact(contact);
+                return false;
             }
-            return this;
         }
     }
 }

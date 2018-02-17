@@ -24,7 +24,17 @@ namespace WebAddressbookTests
 
             List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
 
-            applicationManager.Contacts.ModificationCurrentContact(newContactData);
+            if (applicationManager.Contacts.ModificationCurrentContact() == true)
+            {
+                applicationManager.Contacts.InitContactModification();
+            }
+
+            else if (applicationManager.Contacts.ModificationCurrentContact() == false)
+            {
+                ContactData contact = new ContactData("Ekaterina");
+                contact.Lastname = "Dams";
+                applicationManager.Contacts.CreateContact(contact);
+            }
 
             List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
             oldContacts[0].Firstname = newContactData.Firstname;

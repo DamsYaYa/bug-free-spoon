@@ -19,7 +19,20 @@ namespace WebAddressbookTests
 
             List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
 
-            applicationManager.Groups.ModificationCurrentGroup(newGroupData);
+            if(applicationManager.Groups.ModificationCurrentGroup() == true)
+            {
+                applicationManager.Groups.InitGroupModification();
+            }
+
+            else if(applicationManager.Groups.ModificationCurrentGroup() ==  false)
+            {
+                GroupData group = new GroupData("aaa");
+                group.Header = "bbb";
+                group.Footer = "ccc";
+
+                applicationManager.Groups.CreateGroup(group);
+            }
+
 
             List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
             oldGroups[0].Name = newGroupData.Name;

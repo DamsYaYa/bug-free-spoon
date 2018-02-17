@@ -16,7 +16,10 @@ namespace WebAddressbookTests
         {
             List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
 
-            applicationManager.Contacts.RemoveContact(0);
+            if (applicationManager.Contacts.ModificationCurrentContact() == true)
+            {
+                applicationManager.Contacts.RemoveContact(0);
+            }
 
             List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
 

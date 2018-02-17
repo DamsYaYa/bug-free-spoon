@@ -109,27 +109,17 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper ModificationCurrentGroup(GroupData newGroupData)
+        public bool ModificationCurrentGroup()
         {
             if (IsElementPresent(By.Name("edit")) 
                   && IsElementPresent (By.Name("selected[]")))
             {
-                manager.Navigator.OpenGroupPage();
-
-                SelectGroup(0);
-                InitGroupModification();
-                FillForm(newGroupData);
-                SubmitGroupModification();
+                return true;
             }
             else
             {
-                GroupData group = new GroupData("aaa");
-                group.Header = "bbb";
-                group.Footer = "ccc";
-
-                manager.Groups.CreateGroup(group);
+                return false;
             }
-            return this;
-        }
+        }        
     }
 }

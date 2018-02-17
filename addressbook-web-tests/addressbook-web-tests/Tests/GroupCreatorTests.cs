@@ -20,8 +20,14 @@ namespace WebAddressbookTests
 
             List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
 
-            applicationManager.Groups.CreateGroup(group);
+            if (applicationManager.Groups.ModificationCurrentGroup() == false)
+            {
+                GroupData newgroup = new GroupData("aaa");
+                group.Header = "bbb";
+                group.Footer = "ccc";
 
+                applicationManager.Groups.CreateGroup(group);
+            }
             List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
             oldGroups.Add(group);
             oldGroups.Sort();
@@ -39,7 +45,14 @@ namespace WebAddressbookTests
 
             List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
 
-            applicationManager.Groups.CreateGroup(group);
+            if (applicationManager.Groups.ModificationCurrentGroup() == false)
+            {
+                GroupData newgroup = new GroupData("");
+                group.Header = "";
+                group.Footer = "";
+
+                applicationManager.Groups.CreateGroup(group);
+            }
 
             List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
             oldGroups.Add(group);
@@ -58,7 +71,15 @@ namespace WebAddressbookTests
 
             List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
 
-            applicationManager.Groups.CreateGroup(group);
+
+            if (applicationManager.Groups.ModificationCurrentGroup() == false)
+            {
+                GroupData newgroup = new GroupData("a'a");
+                group.Header = "";
+                group.Footer = "";
+
+                applicationManager.Groups.CreateGroup(group);
+            }
 
             List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
             oldGroups.Add(group);

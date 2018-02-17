@@ -16,7 +16,10 @@ namespace WebAddressbookTests
         {
             List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
 
-            applicationManager.Groups.RemoveGroup(0);
+            if (applicationManager.Groups.ModificationCurrentGroup() == true)
+            {
+                applicationManager.Groups.RemoveGroup(0);
+            }
 
             List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
 
