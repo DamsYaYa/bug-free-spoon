@@ -22,6 +22,9 @@ namespace WebAddressbookTests
             applicationManager.Contacts.CreateContact(contact);
             
             List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
         }
 
@@ -37,6 +40,27 @@ namespace WebAddressbookTests
             applicationManager.Contacts.CreateContact(contact);
 
             List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
+        }
+
+        [Test]
+        public void BadNameContactCreatorTest()
+        {
+            ContactData contact = new ContactData("a'a");
+            contact.Lastname = "";
+
+            List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
+
+            applicationManager.Contacts.AddNew();
+            applicationManager.Contacts.CreateContact(contact);
+
+            List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
         }
     }

@@ -23,7 +23,10 @@ namespace WebAddressbookTests
             applicationManager.Groups.CreateGroup(group);
 
             List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
 
         [Test]
@@ -39,12 +42,29 @@ namespace WebAddressbookTests
             applicationManager.Groups.CreateGroup(group);
 
             List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
             Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
 
-        private void FillForm(GroupData group)
+        [Test]
+        public void BadNameGroupCreatorTest()
         {
-            throw new NotImplementedException();
+
+            GroupData group = new GroupData("a'a");
+            group.Header = "";
+            group.Footer = "";
+
+            List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
+
+            applicationManager.Groups.CreateGroup(group);
+
+            List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
     }
 }
