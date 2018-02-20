@@ -37,7 +37,7 @@ namespace WebAddressbookTests
 
             else if (applicationManager.Contacts.ModificationCurrentContact() == false)
             {
-                ContactData contact = new ContactData("Ekaterina");
+                ContactData contact = new ContactData("Dams","Ekaterina");
                 contact.Lastname = "Dams";
                 applicationManager.Contacts.CreateContact(contact);
             }   

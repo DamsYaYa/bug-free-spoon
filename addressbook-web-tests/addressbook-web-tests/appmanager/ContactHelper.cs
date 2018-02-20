@@ -35,13 +35,16 @@ namespace WebAddressbookTests
                 contactCashe = new List<ContactData>();
                 List<ContactData> contacts = new List<ContactData>();
                 manager.Navigator.OpenHomePage();
-                ICollection<IWebElement> elements = driver.FindElements(By.Name("selected[]"));
-                foreach (IWebElement element in elements)
-
+                ICollection<IWebElement> table = driver.FindElements(By.Name("entry"));
+                foreach (IWebElement element in table)
                 {
-                    contactCashe.Add(new ContactData(element.Text) {
-                        Id = element.FindElement(By.Name("selected[]")).GetAttribute("value")
-                });
+                    string Lastname = element.FindElement(By.XPath("./td[2]")).Text;
+                    string Firstname = element.FindElement(By.XPath("./td[3]")).Text;
+                    contactCashe.Add(new ContactData(Lastname, Firstname)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+
                 }
             }
 
