@@ -18,24 +18,22 @@ namespace WebAddressbookTests
             group.Header = "bbb";
             group.Footer = "ccc";
 
-            List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
 
             if (applicationManager.Groups.ModificationCurrentGroup() == false)
             {
-                GroupData newgroup = new GroupData("aaa");
-                group.Header = "bbb";
-                group.Footer = "ccc";
+                List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
+                GroupData oldGroupData = oldGroups[0];
 
                 applicationManager.Groups.CreateGroup(group);
-            }
 
-            Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
+                Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
-            oldGroups.Add(group);
-            oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
+                List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
+                oldGroups.Add(group);
+                oldGroups.Sort();
+                newGroups.Sort();
+                Assert.AreEqual(oldGroups, newGroups);
+            }           
         }
 
         [Test]
@@ -44,26 +42,24 @@ namespace WebAddressbookTests
 
             GroupData group = new GroupData("");
             group.Header = "";
-            group.Footer = "";
-
-            List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
+            group.Footer = "";            
 
             if (applicationManager.Groups.ModificationCurrentGroup() == false)
             {
-                GroupData newgroup = new GroupData("");
-                group.Header = "";
-                group.Footer = "";
+                List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
+                GroupData oldGroupData = oldGroups[0];
 
                 applicationManager.Groups.CreateGroup(group);
+
+                Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
+
+                List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
+                oldGroups.Add(group);
+                oldGroups.Sort();
+                newGroups.Sort();
+                Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
             }
 
-            Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
-
-            List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
-            oldGroups.Add(group);
-            oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
 
         [Test]
@@ -74,25 +70,22 @@ namespace WebAddressbookTests
             group.Header = "";
             group.Footer = "";
 
-            List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
-
 
             if (applicationManager.Groups.ModificationCurrentGroup() == false)
             {
-                GroupData newgroup = new GroupData("a'a");
-                group.Header = "";
-                group.Footer = "";
+                List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
+                GroupData oldGroupData = oldGroups[0];
 
                 applicationManager.Groups.CreateGroup(group);
-            }
 
-            Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
+                Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
-            oldGroups.Add(group);
-            oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+                List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
+                oldGroups.Add(group);
+                oldGroups.Sort();
+                newGroups.Sort();
+                Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            }           
         }
     }
 }

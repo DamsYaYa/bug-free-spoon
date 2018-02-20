@@ -18,6 +18,7 @@ namespace WebAddressbookTests
             {
 
                 List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
+                ContactData oldContactData = oldContacts[0];
 
                 applicationManager.Contacts.RemoveContact(0);
 
