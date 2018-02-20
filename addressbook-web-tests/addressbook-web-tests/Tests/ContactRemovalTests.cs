@@ -21,6 +21,14 @@ namespace WebAddressbookTests
                 applicationManager.Contacts.RemoveContact(0);
             }
 
+            else if (applicationManager.Contacts.ModificationCurrentContact() == false)
+            {
+                ContactData contact = new ContactData("Ekaterina");
+                contact.Lastname = "Dams";
+                applicationManager.Contacts.CreateContact(contact);
+            }
+
+
             List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
 
             Assert.AreEqual(oldContacts.Count - 1, applicationManager.Contacts.GetContactCount());
