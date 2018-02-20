@@ -19,7 +19,7 @@ namespace WebAddressbookTests
 
         public void ContactModificationTest()
         {
-            ContactData newContactData = new ContactData("Morskaya_pipiska");
+            ContactData newContactData = new ContactData(null, "Morskaya_pipiska");
             newContactData.Lastname = null;
 
             if (applicationManager.Contacts.ModificationCurrentContact() == true)
@@ -50,7 +50,7 @@ namespace WebAddressbookTests
 
             else if (applicationManager.Contacts.ModificationCurrentContact() == false)
             {
-                ContactData contact = new ContactData("Ekaterina");
+                ContactData contact = new ContactData("Dams","Ekaterina");
                 contact.Lastname = "Dams";
                 applicationManager.Contacts.CreateContact(contact);
             }           

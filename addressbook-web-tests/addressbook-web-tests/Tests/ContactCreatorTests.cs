@@ -13,7 +13,7 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreatorTest()
         {
-            ContactData contact = new ContactData("Ekaterina");          
+            ContactData contact = new ContactData("Dams", "Ekaterina");          
             contact.Lastname = "Dams";
 
             
@@ -39,7 +39,7 @@ namespace WebAddressbookTests
         [Test]
         public void EmptyContactCreatorTest()
         {
-            ContactData contact = new ContactData("");
+            ContactData contact = new ContactData("","");
             contact.Lastname = "";
 
      
@@ -64,7 +64,7 @@ namespace WebAddressbookTests
         [Test]
         public void BadNameContactCreatorTest()
         {
-            ContactData contact = new ContactData("a'a");
+            ContactData contact = new ContactData("a'a","");
             contact.Lastname = "";
 
 

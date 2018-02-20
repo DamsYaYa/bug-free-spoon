@@ -8,9 +8,10 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        public ContactData(string firstname)
+        public ContactData(string lastname, string firstname)
         {
             Firstname = firstname;
+            Lastname = lastname;
         }
 
         public string Firstname { get; set; }
@@ -57,7 +58,7 @@ namespace WebAddressbookTests
             {
                 return 1;
             }
-            return Firstname.CompareTo(other.Firstname);
+            return (Lastname + Firstname).CompareTo(other.Lastname + other.Firstname);
         }
 
         public bool Equals(ContactData other)
@@ -77,7 +78,7 @@ namespace WebAddressbookTests
 
         public override int GetHashCode()
         {
-            return Lastname.GetHashCode(); 
+            return Lastname.GetHashCode() + Firstname.GetHashCode();
         }
     }
 }
