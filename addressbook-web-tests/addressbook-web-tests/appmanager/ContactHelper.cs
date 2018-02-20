@@ -26,18 +26,32 @@ namespace WebAddressbookTests
             return this;
         }
 
+        private List<ContactData> contactCashe = null;
+
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.OpenHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.Name("selected[]"));
-            foreach (IWebElement element in elements)
+            if (contactCashe == null)
             {
-                contacts.Add(new ContactData(element.Text));
+                contactCashe = new List<ContactData>();
+                List<ContactData> contacts = new List<ContactData>();
+                manager.Navigator.OpenHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.Name("selected[]"));
+                foreach (IWebElement element in elements)
+
+                {
+                    contactCashe.Add(new ContactData(element.Text) {
+                        Id = element.FindElement(By.Name("selected[]")).GetAttribute("value")
+                });
+                }
             }
-            return contacts;
+
+            return new List<ContactData>(contactCashe);
         }
 
+        public int GetContactCount()
+        {
+            return driver.FindElements(By.Name("selected[]")).Count;
+        }
         public ContactHelper CreateContact(ContactData contact)
         {
             driver.FindElement(By.LinkText("add new")).Click();
@@ -95,6 +109,7 @@ namespace WebAddressbookTests
         {
             // Подтверждаем создание нового контакта
             driver.FindElement(By.Name("submit")).Click();
+            contactCashe = null;
             return this;
         }
 
@@ -116,12 +131,14 @@ namespace WebAddressbookTests
         {
             //Подтверждение удаления контакта
             driver.SwitchTo().Alert().Accept();
+            contactCashe = null;
             return this;
         }
 
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCashe = null;
             return this;
         }
 

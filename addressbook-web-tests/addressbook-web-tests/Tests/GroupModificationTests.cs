@@ -18,8 +18,9 @@ namespace WebAddressbookTests
             newGroupData.Footer = null;
 
             List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
+            GroupData oldGroupData = oldGroups[0];
 
-            if(applicationManager.Groups.ModificationCurrentGroup() == true)
+            if (applicationManager.Groups.ModificationCurrentGroup() == true)
             {
                 applicationManager.Groups.InitGroupModification();
             }
@@ -33,12 +34,20 @@ namespace WebAddressbookTests
                 applicationManager.Groups.CreateGroup(group);
             }
 
-
             List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
             oldGroups[0].Name = newGroupData.Name;
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
-        }
+            Assert.AreEqual(oldGroups, newGroups);
+              
+            foreach (GroupData group in newGroups)
+            {
+                if (group.Id == oldGroupData.Id)
+                {
+                    Assert.AreEqual(newGroupData.Name, group.Name);
+                }
+            }
+        }   
     }
 }

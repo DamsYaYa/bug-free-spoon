@@ -24,7 +24,10 @@ namespace WebAddressbookTests
                 contact.Lastname = "Dams";
                 applicationManager.Contacts.CreateContact(contact);
             }
-            
+
+
+            Assert.AreEqual(oldContacts.Count + 1, applicationManager.Contacts.GetContactCount());
+
             List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
             oldContacts.Add(contact);
             oldContacts.Sort();
@@ -47,6 +50,8 @@ namespace WebAddressbookTests
                 applicationManager.Contacts.CreateContact(contact);
             }
 
+            Assert.AreEqual(oldContacts.Count + 1, applicationManager.Contacts.GetContactCount());
+
             List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
             oldContacts.Add(contact);
             oldContacts.Sort();
@@ -68,6 +73,8 @@ namespace WebAddressbookTests
                 contact.Lastname = "";
                 applicationManager.Contacts.CreateContact(contact);
             }
+
+            Assert.AreEqual(oldContacts.Count + 1, applicationManager.Contacts.GetContactCount());
 
             List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
             oldContacts.Add(contact);

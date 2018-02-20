@@ -23,6 +23,7 @@ namespace WebAddressbookTests
             newContactData.Lastname = null;
 
             List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
+            ContactData oldContactData = oldContacts[0];
 
             if (applicationManager.Contacts.ModificationCurrentContact() == true)
             {
@@ -36,11 +37,22 @@ namespace WebAddressbookTests
                 applicationManager.Contacts.CreateContact(contact);
             }
 
+            Assert.AreEqual(oldContacts.Count, applicationManager.Contacts.GetContactCount());
+
             List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
             oldContacts[0].Firstname = newContactData.Firstname;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
+            Assert.AreEqual(oldContacts, newContacts);
+            
+            foreach (ContactData contact in newContacts)
+            {
+                if (contact.Id == oldContactData.Id)
+                {
+                    Assert.AreEqual(newContactData.Firstname, contact.Firstname);
+                }
+            }
         }
 
     }
