@@ -8,6 +8,9 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
+        public string allPhones;
+        public string allEmails;
+
         public ContactData(string lastname, string firstname)
         {
             Firstname = firstname;
@@ -28,11 +31,39 @@ namespace WebAddressbookTests
 
         public string Address { get; set; }
 
-        public string Home { get; set; }
+        public string HomePhone { get; set; }
 
-        public string Mobile { get; set; }
+        public string MobilePhone { get; set; }
 
-        public string Work { get; set; }
+        public string WorkPhone { get; set; }
+
+        public string AllPhones
+        {
+            get
+            {
+                if (allPhones != null || allPhones == "")
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (CleanUpPhone(HomePhone) + CleanUpPhone(MobilePhone) + CleanUpPhone(WorkPhone)).Trim();
+                }            
+            }
+            set
+            {
+                allPhones = value;
+            }
+        }
+
+        public string CleanUpPhone(string phone)
+        {
+            if (phone == null)
+            {
+                return "";            
+            }
+            return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+        }
 
         public string Fax { get; set; }
 
@@ -41,6 +72,34 @@ namespace WebAddressbookTests
         public string Email2 { get; set; }
 
         public string Email3 { get; set; }
+
+        public string AllEmails
+        {
+            get
+            {
+                if (allEmails != null || allEmails == "")
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return (CleanUpEmail(Email) + CleanUpEmail(Email2) + CleanUpEmail(Email3) + "\r\n").Trim();
+                }
+            }
+            set
+            {
+                allEmails = value;
+            }
+        }
+
+        public string CleanUpEmail(string email)
+        {
+            if (email == null)
+            {
+                return "";
+            }
+            return email.Replace(" ", "");
+        }
 
         public string Homepage { get; set; }
 
