@@ -1,17 +1,9 @@
-﻿using System;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
 using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
-   public class GroupHelper : HelperBase
+    public class GroupHelper : HelperBase
     {
         public object applicationManager;
 

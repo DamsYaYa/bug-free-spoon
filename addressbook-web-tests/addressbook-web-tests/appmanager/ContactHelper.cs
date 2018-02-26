@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
+using OpenQA.Selenium;
+using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
-   public class ContactHelper : HelperBase
+    public class ContactHelper : HelperBase
     {
         public ContactHelper(ApplicationManager manager) : base (manager)
         {
@@ -194,11 +188,12 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public void InitContactModification(int index)
+        public ContactHelper InitContactModification(int index)
         {
             driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"))[7]
-                .FindElements(By.TagName("a")).Click();
+                .FindElement(By.TagName("a")).Click();
+            return this;
         }
 
         public bool ModificationCurrentContact()
@@ -211,6 +206,14 @@ namespace WebAddressbookTests
             {
                 return false;
             }
+        }
+
+        public int GetNumberOfSearchResults()
+        {
+            manager.Navigator.GoToHomePage();
+            string text = driver.FindElement(By.TagName("label")).Text;
+            Match m = new Regex(@"\d+").Match(text);
+            return Int32.Parse(m.Value);
         }
     }
 }
