@@ -59,7 +59,7 @@ namespace WebAddressbookTests
             {
                 return "";            
             }
-            return Regex.Replace (phone, "[ -()]","") + "\\r\n";
+            return Regex.Replace (phone, "[-() ]","") + "\r\n";
         }
 
         public string Fax { get; set; }
@@ -95,7 +95,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return Regex.Replace(email, "[ -()]", "") + "\\r\n";
+            return Regex.Replace(email, "[-() ]", "") + "\r\n";
         }
 
         public string Homepage { get; set; }
