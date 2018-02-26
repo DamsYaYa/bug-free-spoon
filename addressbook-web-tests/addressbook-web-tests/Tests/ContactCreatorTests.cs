@@ -12,24 +12,18 @@ namespace WebAddressbookTests
             ContactData contact = new ContactData("Dams", "Ekaterina");          
             contact.Lastname = "Dams";
 
-            
+            List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
+            ContactData oldContactData = oldContacts[0];
 
-            if (applicationManager.Contacts.ModificationCurrentContact() == false)
-            {
-                List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
-                ContactData oldContactData = oldContacts[0];
+            applicationManager.Contacts.CreateContact(contact);
 
-                applicationManager.Contacts.CreateContact(contact);
+            Assert.AreEqual(oldContacts.Count + 1, applicationManager.Contacts.GetContactCount());
 
-
-                Assert.AreEqual(oldContacts.Count + 1, applicationManager.Contacts.GetContactCount());
-
-                List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
+            List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
                 oldContacts.Add(contact);
                 oldContacts.Sort();
                 newContacts.Sort();
-                Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
-            }
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);           
         }
 
         [Test]
@@ -38,23 +32,18 @@ namespace WebAddressbookTests
             ContactData contact = new ContactData("","");
             contact.Lastname = "";
 
-     
+            List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
+            ContactData oldContactData = oldContacts[0];
 
-            if (applicationManager.Contacts.ModificationCurrentContact() == false)
-            {
-                List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
-                ContactData oldContactData = oldContacts[0];
+            applicationManager.Contacts.CreateContact(contact);
 
-                applicationManager.Contacts.CreateContact(contact);
+            Assert.AreEqual(oldContacts.Count + 1, applicationManager.Contacts.GetContactCount());
 
-                Assert.AreEqual(oldContacts.Count + 1, applicationManager.Contacts.GetContactCount());
-
-                List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
+            List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
                 oldContacts.Add(contact);
                 oldContacts.Sort();
                 newContacts.Sort();
-                Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
-            }            
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);                   
         }
 
         [Test]
@@ -63,23 +52,18 @@ namespace WebAddressbookTests
             ContactData contact = new ContactData("a'a","");
             contact.Lastname = "";
 
+            List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
+            ContactData oldContactData = oldContacts[0];
 
+            applicationManager.Contacts.CreateContact(contact);
 
-            if (applicationManager.Contacts.ModificationCurrentContact() == false)
-            {
-                List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
-                ContactData oldContactData = oldContacts[0];
+            Assert.AreEqual(oldContacts.Count + 1, applicationManager.Contacts.GetContactCount());
 
-                applicationManager.Contacts.CreateContact(contact);
-
-                Assert.AreEqual(oldContacts.Count + 1, applicationManager.Contacts.GetContactCount());
-
-                List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
+            List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
                 oldContacts.Add(contact);
                 oldContacts.Sort();
                 newContacts.Sort();
-                Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
-            }            
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);                        
         }
     }
 }

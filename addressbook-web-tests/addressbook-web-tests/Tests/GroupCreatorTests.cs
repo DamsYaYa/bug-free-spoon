@@ -13,24 +13,20 @@ namespace WebAddressbookTests
             GroupData group = new GroupData("aaa");
             group.Header = "bbb";
             group.Footer = "ccc";
+           
+            List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
+            GroupData oldGroupData = oldGroups[0];
 
+            applicationManager.Groups.CreateGroup(group);
+            applicationManager.Navigator.OpenGroupPage();
 
-            if (applicationManager.Groups.ModificationCurrentGroup() == false)
-            {
-                List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
-                GroupData oldGroupData = oldGroups[0];
+            Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
 
-                applicationManager.Groups.CreateGroup(group);
-                applicationManager.Navigator.OpenGroupPage();
-
-                Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
-
-                List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
+            List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
                 oldGroups.Add(group);
                 oldGroups.Sort();
                 newGroups.Sort();
-                Assert.AreEqual(oldGroups, newGroups);
-            }           
+            Assert.AreEqual(oldGroups, newGroups);                       
         }
 
         [Test]
@@ -39,23 +35,21 @@ namespace WebAddressbookTests
 
             GroupData group = new GroupData("");
             group.Header = "";
-            group.Footer = "";            
+            group.Footer = "";
 
-            if (applicationManager.Groups.ModificationCurrentGroup() == false)
-            {
-                List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
-                GroupData oldGroupData = oldGroups[0];
+            List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
 
-                applicationManager.Groups.CreateGroup(group);
+            GroupData oldGroupData = oldGroups[0];
 
-                Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
+            applicationManager.Groups.CreateGroup(group);
 
-                List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
+
+            List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
                 oldGroups.Add(group);
                 oldGroups.Sort();
                 newGroups.Sort();
-                Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
-            }
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);          
 
         }
 
@@ -67,22 +61,19 @@ namespace WebAddressbookTests
             group.Header = "";
             group.Footer = "";
 
+            List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
 
-            if (applicationManager.Groups.ModificationCurrentGroup() == false)
-            {
-                List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
-                GroupData oldGroupData = oldGroups[0];
+            GroupData oldGroupData = oldGroups[0];
 
-                applicationManager.Groups.CreateGroup(group);
+            applicationManager.Groups.CreateGroup(group);
 
-                Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
+            Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
 
-                List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
+            List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
                 oldGroups.Add(group);
                 oldGroups.Sort();
                 newGroups.Sort();
-                Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
-            }           
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);                    
         }
     }
 }
