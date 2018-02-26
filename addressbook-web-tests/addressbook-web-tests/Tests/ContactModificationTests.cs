@@ -12,14 +12,16 @@ namespace WebAddressbookTests
         public void ContactModificationTest()
         {
             ContactData newContactData = new ContactData(null, "Morskaya_pipiska");
-            newContactData.Lastname = null;
+            newContactData.Lastname = "Dams";
 
             if (applicationManager.Contacts.ModificationCurrentContact() == true)
             {
                 List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
                 ContactData oldContactData = oldContacts[0];
                 applicationManager.Contacts.InitContactModification(0);
+                applicationManager.Navigator.GoToHomePage();
 
+                
                 Assert.AreEqual(oldContacts.Count, applicationManager.Contacts.GetContactCount());
 
 
@@ -27,7 +29,6 @@ namespace WebAddressbookTests
                 oldContacts[0].Firstname = newContactData.Firstname;
                 oldContacts.Sort();
                 newContacts.Sort();
-                Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
                 Assert.AreEqual(oldContacts, newContacts);
 
                 foreach (ContactData contact in newContacts)

@@ -21,6 +21,7 @@ namespace WebAddressbookTests
                 GroupData oldGroupData = oldGroups[0];
 
                 applicationManager.Groups.CreateGroup(group);
+                applicationManager.Navigator.OpenGroupPage();
 
                 Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
 
