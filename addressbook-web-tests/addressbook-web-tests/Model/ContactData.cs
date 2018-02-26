@@ -108,6 +108,39 @@ namespace WebAddressbookTests
 
         public string Id { get; set; }
 
+        
+       public string ContactDataDetails
+       {
+             get
+             {
+                 if (ContactDataDetails != null || ContactDataDetails == "")
+                 {
+                    return ContactDataDetails;
+                 }
+                 else
+                 {
+                     return (CleanUpContactDataDetails(ContactDataDetails)).Trim();
+                 }
+             }
+             set
+             {
+                 ContactDataDetails = value;
+             }
+       }
+ 
+ 
+         private string CleanUpContactDataDetails(string dataPage)
+         {
+             if (dataPage == null || dataPage == "")
+             {
+                 return "";
+             }
+             else
+             {
+                 return Regex.Replace(dataPage, "[ -()]", "") + "\r\n";
+             }
+         }
+
         public int CompareTo(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))

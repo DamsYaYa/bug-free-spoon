@@ -8,7 +8,7 @@ namespace WebAddressbookTests
         [Test]
         public void TestContactInformation()
         {
-            ContactData fromTable = applicationManager.Contacts.GetContactInformationFromTable(1);
+            ContactData fromTable = applicationManager.Contacts.GetContactInformationFromTable(0);
             ContactData fromForm = applicationManager.Contacts.GetContactInformationFromEditForm(0);
 
             Assert.AreEqual(fromTable, fromForm);
@@ -16,6 +16,16 @@ namespace WebAddressbookTests
             Assert.AreEqual(fromTable.AllEmails, fromForm.AllEmails);
             Assert.AreEqual(fromTable.AllPhones, fromForm.AllPhones);
 
+        }
+
+        [Test]
+        public void TestContactDetails()
+        {
+            ContactData fromTable = applicationManager.Contacts.GetContactInformationFromTable(0);
+            ContactHelper fromDetails = applicationManager.Contacts.GetContactInformationFromDetails(0);
+
+           // Assert.AreEqual((fromDetails.Lastname + fromDetails.Firstname + fromDetails.AllPhones 
+             //   + fromDetails.AllEmails), fromDetails.ContactDataDetails);
         }
     }
 }

@@ -98,6 +98,7 @@ namespace WebAddressbookTests
         {
             return driver.FindElements(By.Name("selected[]")).Count;
         }
+
         public ContactHelper CreateContact(ContactData contact)
         {
             driver.FindElement(By.LinkText("add new")).Click();
@@ -214,6 +215,22 @@ namespace WebAddressbookTests
             string text = driver.FindElement(By.TagName("label")).Text;
             Match m = new Regex(@"\d+").Match(text);
             return Int32.Parse(m.Value);
+        }
+
+        public ContactHelper OpenContactDetails (int index)
+        {
+            driver.FindElements(By.Name("entry"))[index]
+                  .FindElements(By.TagName("td"))[6]
+                  .FindElement(By.TagName("a")).Click();
+            return this;
+        }
+
+        public ContactHelper GetContactInformationFromDetails(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            OpenContactDetails(0);
+            string contactDataDetails = driver.FindElement(By.CssSelector("#content")).Text;
+            return this;
         }
     }
 }
