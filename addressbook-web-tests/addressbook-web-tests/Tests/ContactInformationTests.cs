@@ -21,11 +21,11 @@ namespace WebAddressbookTests
         [Test]
         public void TestContactDetails()
         {
-            ContactData fromTable = applicationManager.Contacts.GetContactInformationFromTable(0);
+            applicationManager.Contacts.ModificationCurrentContact();
+            ContactData fromForm = applicationManager.Contacts.GetContactInformationFromEditForm(0);
             ContactHelper fromDetails = applicationManager.Contacts.GetContactInformationFromDetails(0);
 
-           // Assert.AreEqual((fromDetails.Lastname + fromDetails.Firstname + fromDetails.AllPhones 
-             //   + fromDetails.AllEmails), fromDetails.ContactDataDetails);
+            Assert.AreEqual(fromForm,fromDetails);
         }
     }
 }
