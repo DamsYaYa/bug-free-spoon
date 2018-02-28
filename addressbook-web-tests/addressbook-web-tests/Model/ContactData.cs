@@ -55,7 +55,7 @@ namespace WebAddressbookTests
 
         public string CleanUpPhone(string phone)
         {
-            if (phone == null)
+            if (phone == null || phone == "")
             {
                 return "";            
             }
