@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 
@@ -7,13 +8,25 @@ namespace WebAddressbookTests
     [TestFixture]
     public class CreateGroup : AuthTestBase
     {
-       [Test]
-        public void GroupCreatorTest()
-        {                  
-            GroupData group = new GroupData("aaa");
-            group.Header = "bbb";
-            group.Footer = "ccc";
-           
+        public static IEnumerable<GroupData> RandomGroupDataProvider()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            for (int i = 0; i < 5; i++)
+            {
+                groups.Add(new GroupData(GenerateRandomString(30))
+                {
+                    Header = GenerateRandomString(100),
+                    Footer = GenerateRandomString(100)
+                });           
+            
+            }
+            return groups;
+        }
+
+        [Test, TestCaseSource("RandomGroupDataProvider")]
+
+        public void GroupCreatorTest(GroupData group)
+        {
             List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
             GroupData oldGroupData = oldGroups[0];
 
@@ -29,38 +42,9 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldGroups, newGroups);                       
         }
 
-        [Test]
-        public void EmptyGroupCreatorTest()
+        [Test, TestCaseSource("RandomGroupDataProvider")]
+        public void BadNameGroupCreatorTest(GroupData group)
         {
-
-            GroupData group = new GroupData("");
-            group.Header = "";
-            group.Footer = "";
-
-            List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
-
-            GroupData oldGroupData = oldGroups[0];
-
-            applicationManager.Groups.CreateGroup(group);
-
-            Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
-
-            List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
-                oldGroups.Add(group);
-                oldGroups.Sort();
-                newGroups.Sort();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);          
-
-        }
-
-        [Test]
-        public void BadNameGroupCreatorTest()
-        {
-
-            GroupData group = new GroupData("a'a");
-            group.Header = "";
-            group.Footer = "";
-
             List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
 
             GroupData oldGroupData = oldGroups[0];

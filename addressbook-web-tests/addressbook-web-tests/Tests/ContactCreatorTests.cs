@@ -6,12 +6,25 @@ namespace WebAddressbookTests
     [TestFixture]
     public class AddNewContact : AuthTestBase
     {
-        [Test]
-        public void ContactCreatorTest()
+        public static IEnumerable<ContactData> RandomContactDataProvider()
         {
-            ContactData contact = new ContactData("Dams", "Ekaterina");          
-            contact.Lastname = "Dams";
+            List<ContactData> contacts = new List<ContactData>();
+            for (int i = 0; i < 5; i++)
+            {
+                contacts.Add(new ContactData(GenerateRandomString(30), GenerateRandomString(30))
+                {
+                    Firstname = GenerateRandomString(100),
+                    Lastname = GenerateRandomString(100)
+                });
 
+            }
+            return contacts;
+        }
+
+
+        [Test, TestCaseSource("RandomComtactDataProvider")]
+        public void ContactCreatorTest(ContactData contact)
+        {
             List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
             ContactData oldContactData = oldContacts[0];
 
@@ -26,32 +39,9 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);           
         }
 
-        [Test]
-        public void EmptyContactCreatorTest()
+        [Test, TestCaseSource("RandomComtactDataProvider")]
+        public void BadNameContactCreatorTest(ContactData contact)
         {
-            ContactData contact = new ContactData("","");
-            contact.Lastname = "";
-
-            List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
-            ContactData oldContactData = oldContacts[0];
-
-            applicationManager.Contacts.CreateContact(contact);
-
-            Assert.AreEqual(oldContacts.Count + 1, applicationManager.Contacts.GetContactCount());
-
-            List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
-                oldContacts.Add(contact);
-                oldContacts.Sort();
-                newContacts.Sort();
-            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);                   
-        }
-
-        [Test]
-        public void BadNameContactCreatorTest()
-        {
-            ContactData contact = new ContactData("a'a","");
-            contact.Lastname = "";
-
             List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
             ContactData oldContactData = oldContacts[0];
 

@@ -169,5 +169,10 @@ namespace WebAddressbookTests
         {
             return Lastname.GetHashCode() + Firstname.GetHashCode();
         }
+
+        public override string ToString()
+        {
+            return "\nfirstname" + Firstname + "\nlastname" + Lastname;
+        }
     }
 }
