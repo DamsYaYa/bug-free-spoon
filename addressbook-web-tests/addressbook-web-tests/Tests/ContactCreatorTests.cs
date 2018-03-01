@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using System.IO;
 
 namespace WebAddressbookTests
 {
@@ -21,8 +22,25 @@ namespace WebAddressbookTests
             return contacts;
         }
 
+        public static IEnumerable<ContactData> ContactDataFromFile()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            string[] lines = File.ReadAllLines(@"contacts.csv");
+            foreach (string l in lines)
+            {
+                string[] parts = l.Split(',');
+                contacts.Add(new ContactData(parts[0], parts[1])
+                {
+                    Firstname = parts[2],
+                    Lastname = parts[3]
 
-        [Test, TestCaseSource("RandomComtactDataProvider")]
+                });
+            }
+            return contacts;
+        }
+
+
+        [Test, TestCaseSource("ContactDataFromFile")]
         public void ContactCreatorTest(ContactData contact)
         {
             List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
@@ -39,7 +57,7 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);           
         }
 
-        [Test, TestCaseSource("RandomComtactDataProvider")]
+        [Test, TestCaseSource("ContactDataFromFile")]
         public void BadNameContactCreatorTest(ContactData contact)
         {
             List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();

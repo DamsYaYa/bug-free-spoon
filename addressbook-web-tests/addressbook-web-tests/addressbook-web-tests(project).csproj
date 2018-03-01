@@ -85,7 +85,13 @@
     <Compile Include="Tests\ContactRemovalTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="contacts.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Figure\ClassDiagram2.cd" />
+    <None Include="groups.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="TestBaseDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
