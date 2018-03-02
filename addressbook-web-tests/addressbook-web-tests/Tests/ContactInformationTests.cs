@@ -23,7 +23,7 @@ namespace WebAddressbookTests
         {
             applicationManager.Contacts.ModificationCurrentContact();
             ContactData fromForm = applicationManager.Contacts.GetContactInformationFromEditForm(0);
-            ContactHelper fromDetails = applicationManager.Contacts.GetContactInformationFromDetails(0);
+            ContactData fromDetails = applicationManager.Contacts.GetContactInformationFromDetails(0);
 
             Assert.AreEqual(fromForm,fromDetails);
         }

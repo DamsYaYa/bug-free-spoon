@@ -225,12 +225,17 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper GetContactInformationFromDetails(int index)
+        public ContactData GetContactInformationFromDetails(int index)
         {
             manager.Navigator.GoToHomePage();
             OpenContactDetails(0);
-            string contactDataDetails = driver.FindElement(By.CssSelector("#content")).Text;
-            return this;
+            string contactDetails = driver.FindElement(By.CssSelector("#content")).Text;
+
+            return new ContactData("", "")
+            {
+                ContactDetails = contactDetails
+
+            };
         }
     }
 }

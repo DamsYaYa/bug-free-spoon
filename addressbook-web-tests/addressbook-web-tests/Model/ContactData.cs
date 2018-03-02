@@ -7,6 +7,7 @@ namespace WebAddressbookTests
     {
         public string allPhones;
         public string allEmails;
+        public string contactDetails;
 
         public ContactData(string lastname, string firstname)
         {
@@ -108,26 +109,27 @@ namespace WebAddressbookTests
 
         public string Id { get; set; }
 
+
+        public string ContactDetails
+        {
+            get
+            {
+                if (contactDetails != null)
+                {
+                    return contactDetails;
+                }
+
+                else
+                {
+                    return (CleanUpContactDataDetails(ContactDetails)).Trim();
+                }
+            }
+            set
+            {
+                contactDetails = value;
+            }
+        }
         
-       public string ContactDataDetails
-       {
-             get
-             {
-                 if (ContactDataDetails != null || ContactDataDetails == "")
-                 {
-                    return ContactDataDetails;
-                 }
-                 else
-                 {
-                     return (CleanUpContactDataDetails(ContactDataDetails)).Trim();
-                 }
-             }
-             set
-             {
-                 ContactDataDetails = value;
-             }
-       }
- 
  
          private string CleanUpContactDataDetails(string dataPage)
          {
