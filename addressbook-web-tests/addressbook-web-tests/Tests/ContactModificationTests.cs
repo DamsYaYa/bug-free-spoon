@@ -16,12 +16,19 @@ namespace WebAddressbookTests
 
             if (applicationManager.Contacts.ModificationCurrentContact() == true)
             {
+                ContactData contact = new ContactData("Dams", "Ekaterina");
+                contact.Lastname = "Dams";
+                applicationManager.Contacts.CreateContact(contact);
+            }
+
+            else if (applicationManager.Contacts.ModificationCurrentContact() == false)
+            {
                 List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
                 ContactData oldContactData = oldContacts[0];
                 applicationManager.Contacts.InitContactModification(0);
                 applicationManager.Navigator.GoToHomePage();
 
-                
+
                 Assert.AreEqual(oldContacts.Count, applicationManager.Contacts.GetContactCount());
 
 
@@ -39,13 +46,6 @@ namespace WebAddressbookTests
                         Assert.AreEqual(newContactData.Lastname, contact.Lastname);
                     }
                 }
-            }
-
-            else if (applicationManager.Contacts.ModificationCurrentContact() == false)
-            {
-                ContactData contact = new ContactData("Dams","Ekaterina");
-                contact.Lastname = "Dams";
-                applicationManager.Contacts.CreateContact(contact);
             }           
 
         }

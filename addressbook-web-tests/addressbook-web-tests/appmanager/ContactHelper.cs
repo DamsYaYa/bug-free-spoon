@@ -201,11 +201,11 @@ namespace WebAddressbookTests
         {
             if (IsElementPresent(By.XPath("(//input[@name='selected[]'])")))
             {
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
 

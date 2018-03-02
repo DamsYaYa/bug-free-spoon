@@ -124,11 +124,11 @@ namespace WebAddressbookTests
             if (IsElementPresent(By.Name("edit")) 
                   && IsElementPresent (By.Name("selected[]")))
             {
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
     }

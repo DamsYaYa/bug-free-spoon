@@ -15,6 +15,16 @@ namespace WebAddressbookTests
 
             if (applicationManager.Groups.ModificationCurrentGroup() == true)
             {
+                GroupData group = new GroupData("aaa");
+                group.Header = "bbb";
+                group.Footer = "ccc";
+
+                applicationManager.Groups.CreateGroup(group);
+
+            }
+
+            else if(applicationManager.Groups.ModificationCurrentGroup() ==  false)
+            {
                 List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
                 GroupData oldGroupData = oldGroups[0];
 
@@ -36,16 +46,6 @@ namespace WebAddressbookTests
                         Assert.AreEqual(newGroupData.Name, group.Name);
                     }
                 }
-
-            }
-
-            else if(applicationManager.Groups.ModificationCurrentGroup() ==  false)
-            {
-                GroupData group = new GroupData("aaa");
-                group.Header = "bbb";
-                group.Footer = "ccc";
-
-                applicationManager.Groups.CreateGroup(group);
             }              
 
         }   
