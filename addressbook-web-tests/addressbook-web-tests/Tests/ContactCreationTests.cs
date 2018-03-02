@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace WebAddressbookTests
 {
@@ -22,7 +24,7 @@ namespace WebAddressbookTests
             return contacts;
         }
 
-        public static IEnumerable<ContactData> ContactDataFromFile()
+        public static IEnumerable<ContactData> ContactDataFromCsvFile()
         {
             List<ContactData> contacts = new List<ContactData>();
             string[] lines = File.ReadAllLines(@"contacts.csv");
@@ -39,9 +41,14 @@ namespace WebAddressbookTests
             return contacts;
         }
 
+        public static IEnumerable<ContactData> ContactDataFromXmlFile()
+        {            
+           return (List<ContactData>) new XmlSerializer(typeof(List<ContactData>)).Deserialize(new StreamReader(@"contacts.xml"));
+        }
 
-        [Test, TestCaseSource("ContactDataFromFile")]
-        public void ContactCreatorTest(ContactData contact)
+
+        [Test, TestCaseSource("ContactDataFromCsvFile")]
+        public void ContactCreationTest(ContactData contact)
         {
             List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
             ContactData oldContactData = oldContacts[0];
@@ -57,8 +64,8 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);           
         }
 
-        [Test, TestCaseSource("ContactDataFromFile")]
-        public void BadNameContactCreatorTest(ContactData contact)
+        [Test, TestCaseSource("ContactDataFromCsvFile")]
+        public void BadNameContactCreationTest(ContactData contact)
         {
             List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
             ContactData oldContactData = oldContacts[0];

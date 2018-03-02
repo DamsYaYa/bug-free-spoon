@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using System.IO;
 using System.Collections.Generic;
+using System.Xml;
+using System.Xml.Serialization;
 
 
 namespace WebAddressbookTests
@@ -23,7 +25,7 @@ namespace WebAddressbookTests
             return groups;
         }
 
-        public static IEnumerable<GroupData> GroupDataFromFile()
+        public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
             List<GroupData> groups = new List<GroupData>();
             string[] lines = File.ReadAllLines(@"groups.csv");
@@ -40,10 +42,15 @@ namespace WebAddressbookTests
             return groups;
         }
 
+        public static IEnumerable<GroupData> GroupDataFromXmlFile()
+        {
+            return (List<GroupData>) new XmlSerializer(typeof(List<GroupData>)).Deserialize(new StreamReader(@"groups.xml"));
+        }
 
-        [Test, TestCaseSource("GroupDataFromFile")]
 
-        public void GroupCreatorTest(GroupData group)
+        [Test, TestCaseSource("GroupDataFromCsvFile")]
+
+        public void GroupCreationCsvTest(GroupData group)
         {
             List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
             GroupData oldGroupData = oldGroups[0];
@@ -60,8 +67,27 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldGroups, newGroups);                       
         }
 
-        [Test, TestCaseSource("GroupDataFromFile")]
-        public void BadNameGroupCreatorTest(GroupData group)
+        [Test, TestCaseSource("GroupDataFromXmlFile")]
+
+        public void GroupCreationXmlTest(GroupData group)
+        {
+            List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
+            GroupData oldGroupData = oldGroups[0];
+
+            applicationManager.Groups.CreateGroup(group);
+            applicationManager.Navigator.OpenGroupPage();
+
+            Assert.AreEqual(oldGroups.Count + 1, applicationManager.Groups.GetGroupCount());
+
+            List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+        }
+
+        [Test, TestCaseSource("GroupDataFromCsvFile")]
+        public void BadNameGroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
 
