@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
+
 
 namespace WebAddressbookTests
 {
@@ -39,6 +41,12 @@ namespace WebAddressbookTests
                 });
             }
             return contacts;
+        }
+
+        public static IEnumerable<ContactData> ContactDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<ContactData>>(
+                 File.ReadAllText(@"contacts.json"));
         }
 
         public static IEnumerable<ContactData> ContactDataFromXmlFile()
