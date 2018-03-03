@@ -4,7 +4,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
-
+using Excel = Microsoft.Office.Core;
 
 namespace WebAddressbookTests
 {
@@ -43,16 +43,39 @@ namespace WebAddressbookTests
             return contacts;
         }
 
+        public static IEnumerable<ContactData> ContactDataFromXmlFile()
+        {
+            return (List<ContactData>)new XmlSerializer(typeof(List<ContactData>)).Deserialize(new StreamReader(@"contacts.xml"));
+        }
+
         public static IEnumerable<ContactData> ContactDataFromJsonFile()
         {
             return JsonConvert.DeserializeObject<List<ContactData>>(
                  File.ReadAllText(@"contacts.json"));
         }
 
-        public static IEnumerable<ContactData> ContactDataFromXmlFile()
-        {            
-           return (List<ContactData>) new XmlSerializer(typeof(List<ContactData>)).Deserialize(new StreamReader(@"contacts.xml"));
+        public static IEnumerable<ContactData> ContactDataFromExcelFile()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            Excel.Application app = new Excel.Application();
+            Excel.Workbook wb = app.Workbooks.Open(Path.Combine(Directory.GetCurrentDirectory(), @"groups.xlsx"));
+            Excel.Workbook sheet = wb.ActiveSheet;
+            Excel.Range range = sheet.UsedRange;
+            for (int i = 1; i <= range.Rows.Count; i++)
+            {
+                contacts.Add(new ContactData()
+                {
+                    Firstname = range.Cells[i, 1].Value,
+                    Lastname = range.Cells[i, 2].Value,
+
+                });
+            }
+            wb.Close();
+            app.Visible = false;
+            app.Quit();
+            return contacts;
         }
+
 
 
         [Test, TestCaseSource("ContactDataFromCsvFile")]

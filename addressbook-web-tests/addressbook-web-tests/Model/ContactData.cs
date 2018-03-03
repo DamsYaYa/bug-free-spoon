@@ -15,6 +15,10 @@ namespace WebAddressbookTests
             Lastname = lastname;
         }
 
+        public ContactData()
+        {
+        }
+
         public string Firstname { get; set; }
 
         public string Lastname { get; set; }
