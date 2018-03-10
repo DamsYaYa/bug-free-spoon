@@ -83,14 +83,14 @@ namespace WebAddressbookTests
         [Test, TestCaseSource("ContactDataFromCsvFile")]
         public void ContactCreationTest(ContactData contact)
         {
-            List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             ContactData oldContactData = oldContacts[0];
 
             applicationManager.Contacts.CreateContact(contact);
 
             Assert.AreEqual(oldContacts.Count + 1, applicationManager.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
                 oldContacts.Add(contact);
                 oldContacts.Sort();
                 newContacts.Sort();

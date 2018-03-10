@@ -13,15 +13,14 @@ namespace WebAddressbookTests
             if (applicationManager.Contacts.ModificationCurrentContact() == true)
             {
 
-                List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
+                List<ContactData> oldContacts = ContactData.GetAll();
                 ContactData oldContactData = oldContacts[0];
-
-                applicationManager.Contacts.RemoveContact(0);
+                ContactData toBeRemoved = oldContacts[0];
+                applicationManager.Contacts.RemoveContact(toBeRemoved);
 
                 Assert.AreEqual(oldContacts.Count - 1, applicationManager.Contacts.GetContactCount());
-                List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
+                List<ContactData> newContacts = ContactData.GetAll();
 
-                ContactData toBeRemoved = oldContacts[0];
                 oldContacts.RemoveAt(0);
                 Assert.AreEqual(oldContacts, newContacts);
 

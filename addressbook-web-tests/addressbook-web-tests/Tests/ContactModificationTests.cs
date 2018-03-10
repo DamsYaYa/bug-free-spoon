@@ -23,16 +23,17 @@ namespace WebAddressbookTests
 
             else if (applicationManager.Contacts.ModificationCurrentContact() == false)
             {
-                List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
+                List<ContactData> oldContacts = ContactData.GetAll();
                 ContactData oldContactData = oldContacts[0];
-                applicationManager.Contacts.InitContactModification(0);
+                ContactData toBeModified = oldContacts[0];
+                applicationManager.Contacts.InitContactModification(toBeModified);
                 applicationManager.Navigator.GoToHomePage();
 
 
                 Assert.AreEqual(oldContacts.Count, applicationManager.Contacts.GetContactCount());
 
 
-                List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
+                List<ContactData> newContacts = ContactData.GetAll();
                 oldContacts[0].Firstname = newContactData.Firstname;
                 oldContacts.Sort();
                 newContacts.Sort();
