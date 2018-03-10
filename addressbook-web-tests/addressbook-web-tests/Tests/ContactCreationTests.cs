@@ -1,10 +1,12 @@
 ﻿using NUnit.Framework;
-using System.Collections.Generic;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
-using Excel = Microsoft.Office.Core;
+using Excel = Microsoft.Office.Interop.Excel;
+using System;
 
 namespace WebAddressbookTests
 {
@@ -110,6 +112,20 @@ namespace WebAddressbookTests
                 oldContacts.Sort();
                 newContacts.Sort();
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);                        
+        }
+
+        public void TestDBConnectivity()
+        {
+            DateTime start = DateTime.Now;
+            List<ContactData> fromUi = applicationManager.Contacts.GetContactList();
+            DateTime end = DateTime.Now;
+            Console.Out.WriteLine(end.Subtract(start));
+
+            start = DateTime.Now;
+            List<ContactData> fromDB = ContactData.GetAll();
+            end = DateTime.Now;
+
+            Console.Out.WriteLine(end.Subtract(start));
         }
     }
 }
