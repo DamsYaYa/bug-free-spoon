@@ -117,12 +117,12 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper InitContactModification(ContactData toBeModified)
+        public ContactHelper InitContactModification(ContactData contact,ContactData toBeModified)
         {
             manager.Navigator.OpenHomePage();
             SelectContact(contact.Id);
             InitContactModification(0);
-            FillForm(newContactData);
+            FillForm(toBeModified);
             SubmitContactModification();
             return this;
         }
@@ -189,9 +189,9 @@ namespace WebAddressbookTests
         }
 
 
-        public ContactHelper SelectContact(string Id)
+        public ContactHelper SelectContact(String contactId)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'and @value= '" + Id + "'])")).Click();
+            driver.FindElement(By.Id(contactId)).Click();
             return this;
         }
 

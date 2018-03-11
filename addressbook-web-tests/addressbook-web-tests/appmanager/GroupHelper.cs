@@ -66,7 +66,7 @@ namespace WebAddressbookTests
 
             SelectGroup(group.Id);
             InitGroupModification();
-            FillForm(newGroupData);
+            FillForm(group);
             SubmitGroupModification();
 
             return this;
