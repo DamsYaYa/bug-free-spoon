@@ -4,15 +4,21 @@ using LinqToDB.Mapping;
 using System.Linq;
 using System.Collections.Generic;
 
+
 namespace WebAddressbookTests
 {
     [Table(Name = "addressbook")]
 
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
+
         public string allPhones;
         public string allEmails;
         public string contactDetails;
+
+        public ContactData()
+        {
+        }
 
         public ContactData(string lastname, string firstname)
         {
@@ -20,9 +26,6 @@ namespace WebAddressbookTests
             Lastname = lastname;
         }
 
-        public ContactData()
-        {
-        }
 
         [Column(Name = "firstname")]
 
