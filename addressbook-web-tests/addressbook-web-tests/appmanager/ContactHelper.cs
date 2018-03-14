@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OpenQA.Selenium;
 using System.Text.RegularExpressions;
+using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
@@ -41,6 +42,37 @@ namespace WebAddressbookTests
             };
 
 
+        }
+
+        public void AddContactToGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            ClearGroupFilter();
+            selectContact(contact.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        public void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
+        }
+
+        public void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        public void selectContact(string contactId)
+        {
+            driver.FindElement(By.Id(contactId)).Click();
         }
 
         public ContactData GetContactInformationFromTable(int index)

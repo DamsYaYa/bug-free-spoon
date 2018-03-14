@@ -61,7 +61,7 @@ namespace WebAddressbookTests
             List<ContactData> contacts = new List<ContactData>();
             Excel.Application app = new Excel.Application();
             Excel.Workbook wb = app.Workbooks.Open(Path.Combine(Directory.GetCurrentDirectory(), @"groups.xlsx"));
-            Excel.Workbook sheet = wb.ActiveSheet;
+            Excel.Worksheet sheet = wb.ActiveSheet;
             Excel.Range range = sheet.UsedRange;
             for (int i = 1; i <= range.Rows.Count; i++)
             {

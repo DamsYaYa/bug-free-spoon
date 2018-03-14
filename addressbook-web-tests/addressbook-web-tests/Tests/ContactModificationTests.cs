@@ -26,7 +26,7 @@ namespace WebAddressbookTests
                 List<ContactData> oldContacts = ContactData.GetAll();
                 ContactData oldContactData = oldContacts[0];
                 ContactData toBeModified = oldContacts[0];
-                applicationManager.Contacts.InitContactModification(toBeModified);
+                applicationManager.Contacts.InitContactModification(0);
                 applicationManager.Navigator.GoToHomePage();
 
 
