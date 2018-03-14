@@ -29,6 +29,11 @@ namespace WebAddressbookTests
                     Assert.AreNotEqual(group.Id, toBeRemoved.Id);
                 }
             }
+            else if (applicationManager.Groups.ModificationCurrentGroup() == false)
+            {
+                GroupData group = new GroupData("kkk");
+                applicationManager.Groups.CreateGroup(group);
+            }
         }
     }
 }

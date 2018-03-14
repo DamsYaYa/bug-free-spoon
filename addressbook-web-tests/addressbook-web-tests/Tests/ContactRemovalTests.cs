@@ -12,7 +12,6 @@ namespace WebAddressbookTests
         {
             if (applicationManager.Contacts.ModificationCurrentContact() == true)
             {
-
                 List<ContactData> oldContacts = ContactData.GetAll();
                 ContactData oldContactData = oldContacts[0];
                 ContactData toBeRemoved = oldContacts[0];

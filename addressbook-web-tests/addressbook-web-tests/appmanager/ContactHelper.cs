@@ -139,7 +139,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper Modify(ContactData newContactData)
+        public ContactHelper Modify(string contactId, ContactData newContactData)
         {
             manager.Navigator.OpenHomePage();
             SelectContact(1);

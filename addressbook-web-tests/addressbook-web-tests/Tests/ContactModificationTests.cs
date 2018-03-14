@@ -12,41 +12,40 @@ namespace WebAddressbookTests
         public void ContactModificationTest()
         {
             ContactData newContactData = new ContactData(null, "Morskaya_pipiska");
+            newContactData.Firstname = "Ekaterina";
             newContactData.Lastname = "Dams";
 
             if (applicationManager.Contacts.ModificationCurrentContact() == true)
             {
-                ContactData contact = new ContactData("Dams", "Ekaterina");
-                contact.Lastname = "Dams";
-                applicationManager.Contacts.CreateContact(contact);
-            }
-
-            else if (applicationManager.Contacts.ModificationCurrentContact() == false)
-            {
-                List<ContactData> oldContacts = ContactData.GetAll();
-                ContactData oldContactData = oldContacts[0];
+                List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
                 ContactData toBeModified = oldContacts[0];
-                applicationManager.Contacts.InitContactModification(0);
-                applicationManager.Navigator.GoToHomePage();
 
+                applicationManager.Contacts.Modify(toBeModified.Id, newContactData);
 
                 Assert.AreEqual(oldContacts.Count, applicationManager.Contacts.GetContactCount());
 
+                List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
 
-                List<ContactData> newContacts = ContactData.GetAll();
                 oldContacts[0].Firstname = newContactData.Firstname;
+                oldContacts[0].Lastname = newContactData.Lastname;
                 oldContacts.Sort();
                 newContacts.Sort();
                 Assert.AreEqual(oldContacts, newContacts);
 
                 foreach (ContactData contact in newContacts)
                 {
-                    if (contact.Id == oldContactData.Id)
+                    if (contact.Id == toBeModified.Id)
                     {
                         Assert.AreEqual(newContactData.Firstname, contact.Firstname);
                         Assert.AreEqual(newContactData.Lastname, contact.Lastname);
                     }
                 }
+            }
+
+            else if (applicationManager.Contacts.ModificationCurrentContact() == false)
+            {
+                ContactData contact = new ContactData("Dams", "Ekaterina");
+                applicationManager.Contacts.CreateContact(contact);
             }           
 
         }

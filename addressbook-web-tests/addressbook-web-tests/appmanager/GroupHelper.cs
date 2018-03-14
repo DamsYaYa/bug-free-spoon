@@ -48,7 +48,7 @@ namespace WebAddressbookTests
            return driver.FindElements(By.CssSelector("span.group")).Count;
         }
          
-        public GroupHelper Modify(GroupData newGroupData)
+        public GroupHelper Modify(string groupId, GroupData newGroupData)
         {
             manager.Navigator.OpenGroupPage();
 
