@@ -139,10 +139,10 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper Modify(string contactId, ContactData newContactData)
+        public ContactHelper Modify(ContactData contact, ContactData newContactData)
         {
             manager.Navigator.OpenHomePage();
-            SelectContact(1);
+            SelectContact(contact.Id);
             InitContactModification(0);
             FillForm(newContactData);
             SubmitContactModification();
@@ -296,6 +296,26 @@ namespace WebAddressbookTests
                 ContactDetails = contactDetails
 
             };
+        }
+
+        public void RemoveContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.OpenHomePage();
+            SelectGroupFromList(ContactData contact, GroupData group);
+            SelectContact(contact.Id);
+            CommitRemovingContactFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                    .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);        
+        }
+
+        public void SelectGroupFromList(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(name);
+        }
+
+        public void CommitRemovingContactFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
         }
     }
 }

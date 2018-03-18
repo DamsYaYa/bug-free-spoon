@@ -20,7 +20,7 @@ namespace WebAddressbookTests
                 List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
                 ContactData toBeModified = oldContacts[0];
 
-                applicationManager.Contacts.Modify(toBeModified.Id, newContactData);
+                applicationManager.Contacts.Modify(toBeModified, newContactData);
 
                 Assert.AreEqual(oldContacts.Count, applicationManager.Contacts.GetContactCount());
 

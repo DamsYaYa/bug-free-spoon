@@ -48,11 +48,11 @@ namespace WebAddressbookTests
            return driver.FindElements(By.CssSelector("span.group")).Count;
         }
          
-        public GroupHelper Modify(string groupId, GroupData newGroupData)
+        public GroupHelper Modify(GroupData group, GroupData newGroupData)
         {
             manager.Navigator.OpenGroupPage();
 
-            SelectGroup(1);
+            SelectGroup(group.Id);
             InitGroupModification();
             FillForm(newGroupData);
             SubmitGroupModification();

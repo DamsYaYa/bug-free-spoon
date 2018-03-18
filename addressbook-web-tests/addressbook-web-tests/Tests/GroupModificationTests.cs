@@ -18,7 +18,7 @@ namespace WebAddressbookTests
                 List<GroupData> oldGroups = applicationManager.Groups.GetGroupList();
                 GroupData toBeModified = oldGroups[0];
 
-                applicationManager.Groups.Modify(toBeModified.Id, newGroupData);
+                applicationManager.Groups.Modify(toBeModified, newGroupData);
 
                 Assert.AreEqual(oldGroups.Count, applicationManager.Groups.GetGroupCount());
 
