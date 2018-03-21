@@ -6,7 +6,17 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContactModificationTests : ContactTestBase
     {
+        [SetUp]
 
+        public void UpdateContact()
+        {
+            ContactData newContactData = new ContactData(null, "Morskaya_pipiska");
+            newContactData.Firstname = "Ekaterina";
+            newContactData.Lastname = "Dams";
+
+            applicationManager.Contacts.CreateContact(newContactData);
+        }
+        
         [Test]
 
         public void ContactModificationTest()
