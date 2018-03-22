@@ -257,17 +257,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public bool ModificationCurrentContact()
-        {
-            if (IsElementPresent(By.XPath("(//input[@name='selected[]'])")))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+
 
         public int GetNumberOfSearchResults()
         {

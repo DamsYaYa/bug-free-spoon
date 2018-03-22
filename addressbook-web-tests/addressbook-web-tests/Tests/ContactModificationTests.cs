@@ -6,18 +6,22 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContactModificationTests : ContactTestBase
     {
-        [SetUp]
-
-        public void UpdateContact()
-        {
-            ContactData newContactData = new ContactData(null, "Morskaya_pipiska");
-            newContactData.Firstname = "Ekaterina";
-            newContactData.Lastname = "Dams";
-
-            applicationManager.Contacts.CreateContact(newContactData);
-        }
         
         [Test]
+
+        public bool ModificationCurrentContact()
+        {
+            applicationManager.Navigator.OpenHomePage();
+
+            if (IsElementPresent(By.XPath("(//input[@name='selected[0]'])")))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
         public void ContactModificationTest()
         {
@@ -25,14 +29,14 @@ namespace WebAddressbookTests
             newContactData.Firstname = "Ekaterina";
             newContactData.Lastname = "Dams";
 
-            if (applicationManager.Contacts.ModificationCurrentContact() == false)
+            if (ModificationCurrentContact() == false)
             {
                 ContactData contact = new ContactData("Dams", "Ekaterina");
                 applicationManager.Contacts.CreateContact(contact);
 
             }
 
-            else if (applicationManager.Contacts.ModificationCurrentContact() == true)
+            else if (ModificationCurrentContact() == true)
             {
                 List<ContactData> oldContacts = applicationManager.Contacts.GetContactList();
                 ContactData toBeModified = oldContacts[0];
