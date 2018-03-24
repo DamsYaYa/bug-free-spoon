@@ -20,6 +20,21 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public bool VerifyGroupIsPresent(int GroupIndex, GroupData groupData)
+        {
+            manager.Navigator.OpenGroupPage();
+
+            while (!IsElementPresent(By.XPath("(//input[@name='selected[]'])[{Index + 1}]")))
+            {
+                GroupData newGroupData = new GroupData("kkk");
+                newGroupData.Header = null;
+                newGroupData.Footer = null;
+                CreateGroup(newGroupData);
+            }
+
+            return true;
+        }
+
         private List<GroupData> groupCashe = null;
 
         public List<GroupData> GetGroupList()

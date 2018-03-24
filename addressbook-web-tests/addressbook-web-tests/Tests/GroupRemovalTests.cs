@@ -10,30 +10,32 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            if (applicationManager.Groups.ModificationCurrentGroup() == true)
+            GroupData newGroupData = new GroupData("kkk");
+            const int GroupIndex = 5;
+            applicationManager.Groups.VerifyGroupIsPresent(GroupIndex, newGroupData);
+            List<GroupData> oldGroups = GroupData.GetAll();
+            GroupData removeGroup = oldGroups[GroupIndex];
+
+            applicationManager.Groups.RemoveGroup(GroupIndex);
+
+            Assert.AreEqual(oldGroups.Count - 1, applicationManager.Groups.GetGroupCount());
+            List<GroupData> newGroups = applicationManager.Groups.GetGroupList();
+            oldGroups.RemoveAt(GroupIndex);
+            newGroups.Sort();
+            oldGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
             {
-                List<GroupData> oldGroups = GroupData.GetAll();
-                GroupData oldGroupData = oldGroups[0];
-                GroupData toBeRemoved = oldGroups[0];
-                applicationManager.Groups.RemoveGroup(toBeRemoved);
-
-                Assert.AreEqual(oldGroups.Count - 1, applicationManager.Groups.GetGroupCount());
-                List<GroupData> newGroups = GroupData.GetAll();
-
-               
-                oldGroups.RemoveAt(0);
-                Assert.AreEqual(oldGroups, newGroups);
-
-                foreach (GroupData group in newGroups)
-                {
-                    Assert.AreNotEqual(group.Id, toBeRemoved.Id);
-                }
-            }
-            else if (applicationManager.Groups.ModificationCurrentGroup() == false)
-            {
-                GroupData group = new GroupData("kkk");
-                applicationManager.Groups.CreateGroup(group);
-            }
+                Assert.AreNotEqual(group.Id, removeGroup.Id);
+            }           
+            
         }
     }
 }
+
+
+
+       
+          
+

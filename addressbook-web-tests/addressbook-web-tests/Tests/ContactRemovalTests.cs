@@ -8,34 +8,33 @@ namespace WebAddressbookTests
     {
 
         [Test]
+
         public void ContactRemovalTest()
         {
-            if (applicationManager.Contacts.ModificationCurrentContact() == true)
+            ContactData newContactData = new ContactData(null, "Morskaya_pipiska");
+            const int ContactIndex = 5;
+            applicationManager.Contacts.VerifyContactIsPresent(ContactIndex, newContactData);
+            List<ContactData> oldContacts = ContactData.GetAll();
+            ContactData removeContact = oldContacts[ContactIndex];
+
+            applicationManager.Contacts.RemoveContact(ContactIndex);
+
+            Assert.AreEqual(oldContacts.Count - 1, applicationManager.Contacts.GetContactCount());
+
+            List<ContactData> newContacts = applicationManager.Contacts.GetContactList();
+            oldContacts.RemoveAt(ContactIndex);
+            newContacts.Sort();
+            oldContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts)
             {
-                List<ContactData> oldContacts = ContactData.GetAll();
-                ContactData oldContactData = oldContacts[0];
-                ContactData toBeRemoved = oldContacts[0];
-                applicationManager.Contacts.RemoveContact(toBeRemoved);
-
-                Assert.AreEqual(oldContacts.Count - 1, applicationManager.Contacts.GetContactCount());
-                List<ContactData> newContacts = ContactData.GetAll();
-
-                oldContacts.RemoveAt(0);
-                Assert.AreEqual(oldContacts, newContacts);
-
-                foreach (ContactData contact in newContacts)
-                {
-                    Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
-                }
+                Assert.AreNotEqual(contact.Id, removeContact.Id);
             }
-
-            else if (applicationManager.Contacts.ModificationCurrentContact() == false)
-            {
-                ContactData contact = new ContactData("Dams","Ekaterina");
-                contact.Lastname = "Dams";
-                applicationManager.Contacts.CreateContact(contact);
-            }   
-
         }
     }
 }
+
+
+
+       

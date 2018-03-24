@@ -257,7 +257,18 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public bool VerifyContactIsPresent(int ContactIndex, ContactData newContactData)
+        {
+            manager.Navigator.OpenHomePage();
 
+            while (!IsElementPresent(By.XPath($"(//tr[@name='entry'])[{ContactIndex + 1}]")))
+            {
+                newContactData = new ContactData(null, "Morskaya_pipiska");
+                CreateContact(newContactData);
+            }
+
+            return true;
+        }
 
         public int GetNumberOfSearchResults()
         {
