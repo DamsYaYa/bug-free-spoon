@@ -89,6 +89,9 @@ namespace WebAddressbookTests
             }
         }
 
+        public string ContactDetailsText { get; set; }
+        public string ContactDetailsTextTrim { get; set; }
+
         public string CleanUpPhone(string phone)
         {
             if (phone == null || phone == "")

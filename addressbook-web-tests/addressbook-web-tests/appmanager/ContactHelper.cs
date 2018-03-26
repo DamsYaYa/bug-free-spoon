@@ -70,6 +70,19 @@ namespace WebAddressbookTests
             new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
         }
 
+        public ContactData GetContactInformationFromDetailsAndTrim(int index)
+        {
+            manager.Navigator.OpenHomePage();
+            OpenContactDetails(0);
+            string contactDetailsTextTrim = driver.FindElement(By.CssSelector("#content")).Text;
+            contactDetailsTextTrim = Regex.Replace(contactDetailsTextTrim, "[ HMW:\r\n]", "").Trim();
+
+            return new ContactData("", "")
+            {
+                ContactDetailsTextTrim = contactDetailsTextTrim
+            };
+        }
+
         public void selectContact(string contactId)
         {
             driver.FindElement(By.Id(contactId)).Click();
@@ -302,7 +315,7 @@ namespace WebAddressbookTests
         public void RemoveContactFromGroup(ContactData contact, GroupData group)
         {
             manager.Navigator.OpenHomePage();
-            SelectGroupFromList(ContactData contact, GroupData group);
+            SelectGroupFromList(Group.name);
             SelectContact(contact.Id);
             CommitRemovingContactFromGroup();
             new WebDriverWait(driver, TimeSpan.FromSeconds(10))
