@@ -303,11 +303,11 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
             OpenContactDetails(0);
-            string contactDetails = driver.FindElement(By.CssSelector("#content")).Text;
+            var allInfo = driver.FindElement(By.CssSelector("#content")).Text;
 
             return new ContactData("", "")
             {
-                ContactDetails = contactDetails
+                AllInfo = allInfo
 
             };
         }
@@ -315,7 +315,7 @@ namespace WebAddressbookTests
         public void RemoveContactFromGroup(ContactData contact, GroupData group)
         {
             manager.Navigator.OpenHomePage();
-            SelectGroupFromList(Group.name);
+            SelectGroupFromList(ContactData contact, GroupData group);
             SelectContact(contact.Id);
             CommitRemovingContactFromGroup();
             new WebDriverWait(driver, TimeSpan.FromSeconds(10))

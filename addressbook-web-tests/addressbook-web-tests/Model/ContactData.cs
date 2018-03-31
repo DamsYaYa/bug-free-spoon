@@ -11,7 +11,7 @@ namespace WebAddressbookTests
 
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-
+        public string allInfo;
         public string allPhones;
         public string allEmails;
         public string contactDetails;
@@ -91,6 +91,36 @@ namespace WebAddressbookTests
 
         public string ContactDetailsText { get; set; }
         public string ContactDetailsTextTrim { get; set; }
+
+        public string AllInfo
+        {
+            get
+            {
+                if (allInfo != null)
+                {
+                    return allInfo;
+                }
+                else
+                {
+                    return $"{CleanUpContactDataDetails(Firstname)}{CleanUpContactDataDetails(Middlename)}{CleanUpContactDataDetails(Lastname)}" +
+                           $"{CleanUpContactDataDetails(Nickname)}" +
+                           $"{CleanUpContactDataDetails(Title)}" +
+                           $"{CleanUpContactDataDetails(Company)}" +
+                           $"{CleanUpContactDataDetails(Address)}" +
+                           $"{CleanUpContactDataDetails(HomePhone)}" +
+                           $"{CleanUpContactDataDetails(MobilePhone)}" +
+                           $"{CleanUpContactDataDetails(WorkPhone)}" +
+                           $"{CleanUpContactDataDetails(Fax)}" +
+                           $"{CleanUpContactDataDetails(Email)}" +
+                           $"{CleanUpContactDataDetails(Email2)}" +
+                           $"{CleanUpContactDataDetails(Email3)}" +
+                           $"{CleanUpContactDataDetails(Homepage)}" +
+                           $"{CleanUpContactDataDetails(Address2)}" +                          
+                           $"{CleanUpContactDataDetails(Notes)}";
+                }
+            }
+            set => allInfo = CleanUpContactDataDetails(value);
+        }
 
         public string CleanUpPhone(string phone)
         {
