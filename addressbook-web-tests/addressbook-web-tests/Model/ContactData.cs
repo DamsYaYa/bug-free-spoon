@@ -209,7 +209,7 @@ namespace WebAddressbookTests
              }
              else
              {
-                 return Regex.Replace(dataPage, "[ -()]", "") + "\r\n";
+                 return Regex.Replace(dataPage, "[-() ]", "") + "\r\n";
              }
          }
 
