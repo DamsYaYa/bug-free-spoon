@@ -25,6 +25,8 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
 
+            InitContactModification(0);
+
            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"));
 
@@ -278,9 +280,11 @@ namespace WebAddressbookTests
             {
                 newContactData = new ContactData(null, "Morskaya_pipiska");
                 CreateContact(newContactData);
+                manager.Navigator.OpenHomePage();
             }
-
+            
             return true;
+
         }
 
         public int GetNumberOfSearchResults()
@@ -312,15 +316,15 @@ namespace WebAddressbookTests
             };
         }
 
-        public void RemoveContactFromGroup(ContactData contact, GroupData group)
-        {
-            manager.Navigator.OpenHomePage();
-            SelectGroupFromList(ContactData contact, GroupData group);
-            SelectContact(contact.Id);
-            CommitRemovingContactFromGroup();
-            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
-                    .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);        
-        }
+       // public void RemoveContactFromGroup(ContactData contact, GroupData group)
+        //{
+          //  manager.Navigator.OpenHomePage();
+            //SelectGroupFromList(ContactData contact, GroupData group);
+            //SelectContact(contact.Id);
+            //CommitRemovingContactFromGroup();
+            //new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+              //      .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);        
+        //}
 
         public void SelectGroupFromList(string name)
         {

@@ -28,6 +28,7 @@ namespace WebAddressbookTests
             applicationManager.Contacts.VerifyContactIsPresent(ContactIndex, newContactData);
             ContactData ContactDetails = applicationManager.Contacts.GetContactInformationFromDetails(ContactIndex);
             ContactData ContactEditForm = applicationManager.Contacts.GetContactInformationFromEditForm(ContactIndex);
+
             Assert.AreEqual(ContactEditForm.AllInfo, ContactDetails.AllInfo);
         }
     }

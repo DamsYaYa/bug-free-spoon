@@ -76,50 +76,50 @@ namespace addressbook_test_data_generators
 
          static void writeContactsToExcelFile(List<ContactData> contacts, string filename)
         {
-            Excel.Application app = new Excel.Application();
-            app.Visible = true;
-            Excel.Workbook wb = app.Workbook.Add();
-            Excel.Worksheet sheet = wb.ActiveSheet;
+           // Excel.Application app = new Excel.Application();
+           // app.Visible = true;
+           // Excel.Workbook wb = app.Workbook.Add();
+           // Excel.Worksheet sheet = wb.ActiveSheet;
 
             int row = 1;
             foreach (ContactData contact in contacts)
             {
-                sheet.Cells[row, 1] = contact.Firstname;
-                sheet.Cells[row, 2] = contact.Lastname;
-                sheet.Cells[row, 3] = contact.AllPhones;
+              //  sheet.Cells[row, 1] = contact.Firstname;
+              //  sheet.Cells[row, 2] = contact.Lastname;
+              //  sheet.Cells[row, 3] = contact.AllPhones;
                 row++;
             }
 
             string fullPath = Path.Combine(Directory.GetCurrentDirectory(), filename);
             File.Delete(fullPath);
-            wb.SaveAs(fullPath);
+           // wb.SaveAs(fullPath);
 
-            wb.Close();
+           // wb.Close();
         }
 
          static void writeGroupsToExcelFile(List<GroupData> groups, string filename)
         {
-            Excel.Application app = new Excel.Application();
-            app.Visible = true;
-            Excel.Workbook wb = app.Workbook.Add();
-            Excel.Worksheet sheet = wb.ActiveSheet;
+          //  Excel.Application app = new Excel.Application();
+          //  app.Visible = true;
+          //  Excel.Workbook wb = app.Workbook.Add();
+          //  Excel.Worksheet sheet = wb.ActiveSheet;
 
             int row = 1;
             foreach(GroupData group in groups)
             {
-                sheet.Cells[row, 1] = group.Name;
-                sheet.Cells[row, 2] = group.Header;
-                sheet.Cells[row, 3] = group.Footer;
+            //    sheet.Cells[row, 1] = group.Name;
+            //    sheet.Cells[row, 2] = group.Header;
+            //    sheet.Cells[row, 3] = group.Footer;
                 row++;
             }
 
             string fullPath = Path.Combine(Directory.GetCurrentDirectory(), filename);
             File.Delete(fullPath);
-            wb.SaveAs(fullPath);
+           // wb.SaveAs(fullPath);
 
-            wb.Close();
-            app.Visible = false;
-            app.Quit();
+           // wb.Close();
+          //  app.Visible = false;
+          //  app.Quit();
 
         }
 
