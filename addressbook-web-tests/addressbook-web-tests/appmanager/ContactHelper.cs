@@ -56,6 +56,7 @@ namespace WebAddressbookTests
         public void AddContactToGroup(ContactData contact, GroupData group)
         {
             manager.Navigator.GoToHomePage();
+
             ClearGroupFilter();
             selectContact(contact.Id);
             SelectGroupToAdd(group.Name);
