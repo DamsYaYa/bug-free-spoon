@@ -25,7 +25,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
 
-            InitContactModification(0);
+            OpenContactDetails(0);
 
            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"));
