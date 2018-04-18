@@ -24,12 +24,10 @@ namespace WebAddressbookTests
         [Test]
         public void TestContactDetails()
         {
-            const int ContactIndex = 5;
-            applicationManager.Contacts.VerifyContactIsPresent(ContactIndex, newContactData);
-            ContactData ContactDetails = applicationManager.Contacts.GetContactInformationFromDetails(ContactIndex);
-            ContactData ContactEditForm = applicationManager.Contacts.GetContactInformationFromEditForm(ContactIndex);
+            ContactData fromDetails = applicationManager.Contacts.GetContactInformationFromDetails(0);
+            ContactData fromForm = applicationManager.Contacts.GetContactInformationFromEditForm(0);
 
-            Assert.AreEqual(ContactEditForm.AllInfo, ContactDetails.AllInfo);
+            Assert.AreEqual(fromDetails.AllInfo, fromForm.AllInfo);
         }
     }
 }

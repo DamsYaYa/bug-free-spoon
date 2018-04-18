@@ -25,7 +25,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
 
-            OpenContactDetails(0);
+            InitContactModification(0);
 
            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"));
@@ -93,7 +93,10 @@ namespace WebAddressbookTests
         public ContactData GetContactInformationFromTable(int index)
         {
             manager.Navigator.GoToHomePage();
-            InitContactModification(0);
+
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"));
+            
             string Firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string Lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string Address = driver.FindElement(By.Name("address")).GetAttribute("value");
@@ -307,6 +310,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
             OpenContactDetails(0);
+
             var allInfo = driver.FindElement(By.CssSelector("#content")).Text;
 
             return new ContactData("", "")
