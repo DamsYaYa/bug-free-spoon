@@ -25,7 +25,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
 
-            OpenContactDetails(0);
+            InitContactModification(0);
 
             string Firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string Lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
@@ -167,7 +167,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper InitContactModification(ContactData contact,ContactData toBeModified)
+        public ContactHelper ContactModification(ContactData contact,ContactData toBeModified)
         {
             manager.Navigator.OpenHomePage();
             SelectContact(contact.Id);

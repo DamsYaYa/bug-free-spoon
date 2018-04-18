@@ -27,6 +27,7 @@ namespace WebAddressbookTests
         {            
             driver = new ChromeDriver();
             baseURL = "http://localhost/";
+            baseURL = "http://localhost/";
             verificationErrors = new StringBuilder(); 
 
             loginHelper = new LoginHelper(this);
