@@ -25,23 +25,30 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
 
-            InitContactModification(0);
+            OpenContactDetails(0);
 
-           IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
-                .FindElements(By.TagName("td"));
+            string Firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string Lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string Address = driver.FindElement(By.Name("address")).GetAttribute("value");
+            string HomePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string MobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string WorkPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string Email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string Email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            string Email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
 
-            string Lastname = cells[1].Text;
-            string Firstname = cells[2].Text;
-            string Address = cells[3].Text;
-            string allEmails = cells[4].Text;
-            string allPhones = cells[5].Text;
 
             return new ContactData(Lastname, Firstname)
             {
                 Address = Address,
-                AllEmails = allEmails,
-                AllPhones = allPhones,
+                HomePhone = HomePhone,
+                MobilePhone = MobilePhone,
+                WorkPhone = WorkPhone,
+                Email = Email,
+                Email2 = Email2,
+                Email3 = Email3
             };
+
 
 
         }
@@ -96,27 +103,20 @@ namespace WebAddressbookTests
 
             IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"));
-            
-            string Firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
-            string Lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
-            string Address = driver.FindElement(By.Name("address")).GetAttribute("value");
-            string HomePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
-            string MobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
-            string WorkPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
-            string Email = driver.FindElement(By.Name("email")).GetAttribute("value");
-            string Email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
-            string Email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+
+            string Lastname = cells[1].Text;
+            string Firstname = cells[2].Text;
+            string Address = cells[3].Text;
+            string allEmails = cells[4].Text;
+            string allPhones = cells[5].Text;
 
             return new ContactData(Lastname, Firstname)
             {
                 Address = Address,
-                HomePhone = HomePhone,
-                MobilePhone = MobilePhone,
-                WorkPhone = WorkPhone,
-                Email = Email,
-                Email2 = Email2,
-                Email3 = Email3
+                AllEmails = allEmails,
+                AllPhones = allPhones,
             };
+
         }
 
         private List<ContactData> contactCashe = null;
