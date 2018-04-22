@@ -21,37 +21,90 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactData GetContactInformationFromEditForm(int index)
+        public ContactData GetContactInformationFromEditForm(int index, bool isItFordetailsPage = false)
         {
             manager.Navigator.GoToHomePage();
 
             InitContactModification(0);
 
-            string Firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
-            string Lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
-            string Address = driver.FindElement(By.Name("address")).GetAttribute("value");
-            string HomePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
-            string MobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
-            string WorkPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
-            string Email = driver.FindElement(By.Name("email")).GetAttribute("value");
-            string Email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
-            string Email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+            var firstName = GetTextOfAttributeValue(By.Name("firstname"), "value");
+            var lastName = GetTextOfAttributeValue(By.Name("lastname"), "value");
+            var fullName = $"{firstName+lastName}";
+ 
+            var middleName = GetTextOfAttributeValue(By.Name("middlename"), "value");
+            var nickName = GetTextOfAttributeValue(By.Name("nickname"), "value");
+            var companyName = GetTextOfAttributeValue(By.Name("company"), "value");
+            var title = GetTextOfAttributeValue(By.Name("title"), "value");
+            var address = driver.FindElement(By.Name("address")).Text;
 
-
-            return new ContactData(Lastname, Firstname)
+            var homePhone = GetTextOfAttributeValue(By.Name("home"), "value");
+            if (!String.IsNullOrEmpty(homePhone))
             {
-                Address = Address,
-                HomePhone = HomePhone,
-                MobilePhone = MobilePhone,
-                WorkPhone = WorkPhone,
-                Email = Email,
-                Email2 = Email2,
-                Email3 = Email3
+                homePhone = $"H:{homePhone}";
+            }
+
+            var mobilePhone = GetTextOfAttributeValue(By.Name("mobile"), "value");
+            if (!String.IsNullOrEmpty(mobilePhone))
+            {
+                mobilePhone = $"M:{mobilePhone}";
+            }
+
+            var workPhone = GetTextOfAttributeValue(By.Name("work"), "value");
+            // var workPhone = SelectTheRightValue(workPhoneValue, "W:", isItFordetailsPage);
+            if (!String.IsNullOrEmpty(workPhone))
+            {
+                workPhone = $"W:{workPhone}";
+            }
+
+
+            var fax = GetTextOfAttributeValue(By.Name("fax"), "value");
+            // var fax = SelectTheRightValue(faxValue, "F:", isItFordetailsPage);
+            if (!String.IsNullOrEmpty(fax))
+            {
+                fax = $"F:{fax}";
+            }
+
+            var email = GetTextOfAttributeValue(By.Name("email"), "value");
+            var email2 = GetTextOfAttributeValue(By.Name("email2"), "value");
+            var email3 = GetTextOfAttributeValue(By.Name("email3"), "value");
+
+            var homepageValue = driver.FindElement(By.Name("homepage")).GetAttribute("value");
+            var homepage = SelectTheRightValue(homepageValue, "Homepage:", isItFordetailsPage);
+
+            var address2 = driver.FindElement(By.Name("address2")).Text;
+
+            var phone2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
+            // var phone2 = SelectTheRightValue(homePhoneSecondValue, "P:", isItFordetailsPage);
+            if (!String.IsNullOrEmpty(phone2))
+            {
+                phone2 = $"P:{fax}";
+            }
+
+            var notes = driver.FindElement(By.Name("notes")).Text;
+
+            return new ContactData
+            {
+                Firstname = firstName,
+                Lastname = lastName,
+                Middlename = middleName,
+                Nickname = nickName,
+                Company = companyName,
+                Title = title,
+                Address = address,
+                HomePhone = homePhone,
+                MobilePhone = mobilePhone,
+                WorkPhone = workPhone,
+                Fax = fax,
+                Email = email,
+                Email2 = email2,
+                Email3 = email3,
+                Homepage = homepage,
+                Address2 = address2,
+                Phone2 = phone2,
+                Notes = notes
             };
-
-
-
         }
+
 
         public void AddContactToGroup(ContactData contact, GroupData group)
         {
@@ -78,19 +131,6 @@ namespace WebAddressbookTests
         public void SelectGroupToAdd(string name)
         {
             new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
-        }
-
-        public ContactData GetContactInformationFromDetailsAndTrim(int index)
-        {
-            manager.Navigator.OpenHomePage();
-            OpenContactDetails(0);
-            string contactDetailsTextTrim = driver.FindElement(By.CssSelector("#content")).Text;
-            contactDetailsTextTrim = Regex.Replace(contactDetailsTextTrim, "[ HMW:\r\n]", "").Trim();
-
-            return new ContactData("", "")
-            {
-                ContactDetailsTextTrim = contactDetailsTextTrim
-            };
         }
 
         public void selectContact(string contactId)
@@ -339,6 +379,27 @@ namespace WebAddressbookTests
         public void CommitRemovingContactFromGroup()
         {
             driver.FindElement(By.Name("remove")).Click();
+        }
+
+        public string GetTextOfAttributeValue(By locator, string attributeValue)
+        {
+            return driver.FindElement(locator).GetAttribute(attributeValue);
+        }
+
+        public string SelectTheRightValue(string fieldValue, string additionalSymbol, bool fordetailsPage = false)
+        {
+            if (fieldValue != "" && fordetailsPage)
+            {
+                return additionalSymbol + fieldValue;
+            }
+            else if (fieldValue != "")
+            {
+                return fieldValue;
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }

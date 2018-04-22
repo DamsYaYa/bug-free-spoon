@@ -8,7 +8,7 @@ namespace WebAddressbookTests
         ContactData newContactData = new ContactData(null, "Morskaya_pipiska");
 
         [Test]
-        public void TestContactInformation()
+        public void ContactInformationTest()
         {
             ContactData fromTable = applicationManager.Contacts.GetContactInformationFromTable(0);
             ContactData fromForm = applicationManager.Contacts.GetContactInformationFromEditForm(0);
@@ -22,9 +22,9 @@ namespace WebAddressbookTests
         }
 
         [Test]
-        public void TestContactDetails()
+        public void ContactDetailsTest()
         {
-            ContactData fromDetails = applicationManager.Contacts.GetContactInformationFromDetailsAndTrim(0);
+            ContactData fromDetails = applicationManager.Contacts.GetContactInformationFromDetails(0);
             ContactData fromForm = applicationManager.Contacts.GetContactInformationFromEditForm(0);
 
             Assert.AreEqual(fromDetails.AllInfo, fromForm.AllInfo);

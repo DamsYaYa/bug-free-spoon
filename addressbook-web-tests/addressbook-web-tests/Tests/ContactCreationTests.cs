@@ -28,22 +28,22 @@ namespace WebAddressbookTests
             return contacts;
         }
 
-        public static IEnumerable<ContactData> ContactDataFromCsvFile()
-        {
-            List<ContactData> contacts = new List<ContactData>();
-            string[] lines = File.ReadAllLines(@"contacts.csv");
-            foreach (string l in lines)
-            {
-                string[] parts = l.Split(',');
-                contacts.Add(new ContactData(parts[0], parts[1])
-                {
-                    Firstname = parts[2],
-                    Lastname = parts[3]
-
-                });
-            }
-            return contacts;
-        }
+ //       public static IEnumerable<ContactData> ContactDataFromCsvFile()
+ //       {
+ //           List<ContactData> contacts = new List<ContactData>();
+ //           string[] lines = File.ReadAllLines(@"contacts.csv");
+ //           foreach (string l in lines)
+ //           {
+ //               string[] parts = l.Split(',');
+ //               contacts.Add(new ContactData(parts[0], parts[1])
+ //               {
+ //                   Firstname = parts[2],
+ //                   Lastname = parts[3]
+ //
+ //               });
+ //           }
+ //           return contacts;
+ //       }
 
         public static IEnumerable<ContactData> ContactDataFromXmlFile()
         {
