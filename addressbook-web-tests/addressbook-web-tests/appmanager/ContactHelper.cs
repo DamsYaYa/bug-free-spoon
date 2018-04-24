@@ -21,17 +21,16 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactData GetContactInformationFromEditForm(int index, bool isItFordetailsPage = false)
+        public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.GoToHomePage();
 
             InitContactModification(0);
-
-            var firstName = GetTextOfAttributeValue(By.Name("firstname"), "value");
-            var lastName = GetTextOfAttributeValue(By.Name("lastname"), "value");
-            var fullName = $"{firstName+lastName}";
- 
-            var middleName = GetTextOfAttributeValue(By.Name("middlename"), "value");
+            
+            var firstName = GetTextOfAttributeValue(By.Name("firstname"), "value").Trim();
+            var lastName = GetTextOfAttributeValue(By.Name("lastname"), "value").Trim();
+           
+            var middleName = GetTextOfAttributeValue(By.Name("middlename"), "value").Trim();
             var nickName = GetTextOfAttributeValue(By.Name("nickname"), "value");
             var companyName = GetTextOfAttributeValue(By.Name("company"), "value");
             var title = GetTextOfAttributeValue(By.Name("title"), "value");
@@ -50,7 +49,7 @@ namespace WebAddressbookTests
             }
 
             var workPhone = GetTextOfAttributeValue(By.Name("work"), "value");
-            // var workPhone = SelectTheRightValue(workPhoneValue, "W:", isItFordetailsPage);
+            
             if (!String.IsNullOrEmpty(workPhone))
             {
                 workPhone = $"W:{workPhone}";
@@ -58,7 +57,7 @@ namespace WebAddressbookTests
 
 
             var fax = GetTextOfAttributeValue(By.Name("fax"), "value");
-            // var fax = SelectTheRightValue(faxValue, "F:", isItFordetailsPage);
+            
             if (!String.IsNullOrEmpty(fax))
             {
                 fax = $"F:{fax}";
@@ -69,12 +68,12 @@ namespace WebAddressbookTests
             var email3 = GetTextOfAttributeValue(By.Name("email3"), "value");
 
             var homepageValue = driver.FindElement(By.Name("homepage")).GetAttribute("value");
-            var homepage = SelectTheRightValue(homepageValue, "Homepage:", isItFordetailsPage);
+            var homepage = SelectTheRightValue(homepageValue, "Homepage:");
 
             var address2 = driver.FindElement(By.Name("address2")).Text;
 
             var phone2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
-            // var phone2 = SelectTheRightValue(homePhoneSecondValue, "P:", isItFordetailsPage);
+            
             if (!String.IsNullOrEmpty(phone2))
             {
                 phone2 = $"P:{fax}";
