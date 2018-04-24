@@ -44,6 +44,15 @@ namespace WebAddressbookTests
 
         public string Lastname { get; set; }
 
+        public string CleanUpLastname(string lastName)
+        {
+            if (lastName == null || lastName == "")
+            {
+                return "";
+            }
+            return Regex.Replace(lastName, "[-() ]", "") + "\r\n";
+        }
+
         [Column(Name = "middlename")]
 
         public string Middlename { get; set; }
@@ -113,14 +122,14 @@ namespace WebAddressbookTests
                 {
                     return $"{(Firstname)}"  +
                            $"{CleanUpContactDataDetails(Middlename)}" +
-                           $"{CleanUpContactDataDetails(Lastname)}" +
+                           $"{CleanUpContactDataDetails(Lastname)}" + "\r\n" +
                            $"{CleanUpContactDataDetails(Nickname)}" +
                            $"{CleanUpContactDataDetails(Title)}" +
                            $"{CleanUpContactDataDetails(Company)}" +
                            $"{CleanUpContactDataDetails(Address)}" +
                            $"{CleanUpContactDataDetails(HomePhone)}" +
                            $"{CleanUpContactDataDetails(MobilePhone)}" +
-                           $"{CleanUpContactDataDetails(WorkPhone)}" +
+                           $"{CleanUpContactDataDetails(WorkPhone)}" + "\r\n" +
                            $"{CleanUpContactDataDetails(Fax)}" +
                            $"{CleanUpContactDataDetails(Email)}" +
                            $"{CleanUpContactDataDetails(Email2)}" +
